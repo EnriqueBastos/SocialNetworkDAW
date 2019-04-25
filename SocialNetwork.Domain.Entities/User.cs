@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace SocialNetwork.Domain.Entities
 {
@@ -20,6 +19,8 @@ namespace SocialNetwork.Domain.Entities
         public string Password { get; set; }
 
         public DateTime DateBirthday { get; set; }
+
+        public byte PhotoProfile { get; set; }
 
         public string BackgroundApp { get; set; }
 
