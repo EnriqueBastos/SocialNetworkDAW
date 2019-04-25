@@ -11,6 +11,8 @@ namespace SocialNetwork.Domain.Entities
 
         public string Title { get; set; }
 
+        public byte BytesPhoto { get; set; }
+
         public string PhotoRoute { get; set; }
 
         public int Likes { get; set; }

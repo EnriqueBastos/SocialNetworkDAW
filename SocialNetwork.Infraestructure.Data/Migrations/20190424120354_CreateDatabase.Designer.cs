@@ -10,7 +10,7 @@ using SocialNetwork.Data;
 namespace SocialNetwork.Infraestructure.Migrations
 {
     [DbContext(typeof(SocialNetworkContext))]
-    [Migration("20190424084925_CreateDatabase")]
+    [Migration("20190424120354_CreateDatabase")]
     partial class CreateDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -115,6 +115,8 @@ namespace SocialNetwork.Infraestructure.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<byte>("BytesPhoto");
 
                     b.Property<int>("Dislikes");
 

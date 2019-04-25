@@ -114,6 +114,8 @@ namespace SocialNetwork.Infraestructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<byte>("BytesPhoto");
+
                     b.Property<int>("Dislikes");
 
                     b.Property<int>("Likes");

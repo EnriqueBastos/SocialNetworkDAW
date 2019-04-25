@@ -28,6 +28,7 @@ namespace SocialNetwork.Infraestructure.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Title = table.Column<string>(nullable: true),
+                    BytesPhoto = table.Column<byte>(nullable: false),
                     PhotoRoute = table.Column<string>(nullable: true),
                     Likes = table.Column<int>(nullable: false),
                     Dislikes = table.Column<int>(nullable: false)
