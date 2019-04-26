@@ -20,7 +20,7 @@ namespace SocialNetwork.Domain.Entities
 
         public DateTime DateBirthday { get; set; }
 
-        public byte PhotoProfile { get; set; }
+        public byte[] PhotoProfile { get; set; }
 
         public string BackgroundApp { get; set; }
 
