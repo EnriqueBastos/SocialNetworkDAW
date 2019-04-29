@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using SocialNetwork.Application.Dtos;
+using SocialNetwork.Domain.Dtos;
 using SocialNetwork.Domain.Contracts;
 using SocialNetwork.Infraestructure.Repository;
 
@@ -21,7 +21,7 @@ namespace SocialNetwork.Domain.Business
         }
         public UserDto GetProfileInfo(int id)
         {
-            var user = _userRepository.GetUser().FirstOrDefault(x => x.ID == id);
+            var user = _userRepository.GetUser().FirstOrDefault(x => x.Id == id);
             return new UserDto
             {
                 Name = user.Name,

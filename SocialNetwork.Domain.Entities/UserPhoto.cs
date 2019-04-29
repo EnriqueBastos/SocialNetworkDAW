@@ -13,5 +13,8 @@ namespace SocialNetwork.Domain.Entities
 
         public User User { get; set; }
         public Photo Photo { get; set; }
+
+        public ICollection<UserPhotoComment> UserPhotoComments { get; set; }
     }
+
 }

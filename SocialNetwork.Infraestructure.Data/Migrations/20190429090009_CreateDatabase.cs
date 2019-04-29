@@ -28,8 +28,8 @@ namespace SocialNetwork.Infraestructure.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Title = table.Column<string>(nullable: true),
-                    BytesPhoto = table.Column<byte>(nullable: false),
-                    PhotoRoute = table.Column<string>(nullable: true),
+                    ImageBytes = table.Column<byte[]>(nullable: true),
+                    UpdateDateTime = table.Column<DateTime>(nullable: false),
                     Likes = table.Column<int>(nullable: false),
                     Dislikes = table.Column<int>(nullable: false)
                 },
@@ -42,18 +42,19 @@ namespace SocialNetwork.Infraestructure.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
                     Password = table.Column<string>(nullable: true),
                     DateBirthday = table.Column<DateTime>(nullable: false),
+                    PhotoProfile = table.Column<byte[]>(nullable: true),
                     BackgroundApp = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.ID);
+                    table.PrimaryKey("PK_Users", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -72,7 +73,7 @@ namespace SocialNetwork.Infraestructure.Migrations
                         name: "FK_Contacts_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "ID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -98,7 +99,7 @@ namespace SocialNetwork.Infraestructure.Migrations
                         name: "FK_GroupChats_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "ID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -126,7 +127,7 @@ namespace SocialNetwork.Infraestructure.Migrations
                         name: "FK_MessageChats_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "ID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -146,7 +147,7 @@ namespace SocialNetwork.Infraestructure.Migrations
                         name: "FK_Musics_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "ID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -172,7 +173,7 @@ namespace SocialNetwork.Infraestructure.Migrations
                         name: "FK_UserPhotos_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "ID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -182,6 +183,7 @@ namespace SocialNetwork.Infraestructure.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    UserId = table.Column<int>(nullable: false),
                     UserPhotoId = table.Column<int>(nullable: false),
                     CommentText = table.Column<string>(nullable: true)
                 },
@@ -189,11 +191,12 @@ namespace SocialNetwork.Infraestructure.Migrations
                 {
                     table.PrimaryKey("PK_UserPhotoComments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UserPhotoComments_UserPhotos_UserPhotoId",
-                        column: x => x.UserPhotoId,
-                        principalTable: "UserPhotos",
+                        name: "FK_UserPhotoComments_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    
                 });
 
             migrationBuilder.CreateIndex(
@@ -224,6 +227,11 @@ namespace SocialNetwork.Infraestructure.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Musics_UserId",
                 table: "Musics",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserPhotoComments_UserId",
+                table: "UserPhotoComments",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(

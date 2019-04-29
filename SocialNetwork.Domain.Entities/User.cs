@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-
+using System.Text;
 
 namespace SocialNetwork.Domain.Entities
 {
     public class User
     {
-        public int ID { get; set; }
-
+        public int Id { get; set; }
         public string Name { get; set; }
 
         public string LastName { get; set; }
@@ -24,12 +22,14 @@ namespace SocialNetwork.Domain.Entities
 
         public string BackgroundApp { get; set; }
 
-        public ICollection<GroupChat> GroupChat { get; set; }
+        //public ICollection<UserPhoto> UserPhotos { get; set; }
 
-        public ICollection<Music> Music { get; set; }
+        //public ICollection<PhotoComment> PhotoComments { get; set; }
 
-        public ICollection<Contact> Contacts { get; set; }
-        [NotMapped]
-        public ICollection<UserPhotoComment> UserPhotoComments { get; set; }
+       public ICollection<UserPhotoComment> UserPhotoComments { get; set; }
+
+        public ICollection<Music> Musics { get; set; }
+
+        public ICollection<GroupChat> GroupChats { get; set; }
     }
 }

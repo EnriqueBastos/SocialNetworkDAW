@@ -1,13 +1,13 @@
 ﻿using SocialNetwork.Domain.Entities;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace SocialNetwork.Domain.Contracts
 {
-    public interface IUserRepository
+    public interface IMusicRepository
     {
-        IQueryable<User> GetUser();
-
-        //void AddUser();
+        IQueryable<Music> GetMusic();
     }
 }

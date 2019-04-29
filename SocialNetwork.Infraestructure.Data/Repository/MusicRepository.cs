@@ -1,28 +1,26 @@
 ﻿using SocialNetwork.Data;
 using SocialNetwork.Domain.Contracts;
 using SocialNetwork.Domain.Entities;
+using System;
+using System.Collections.Generic;
 using System.Linq;
-
+using System.Text;
 
 namespace SocialNetwork.Infraestructure.Repository
 {
-    public class UserRepository : IUserRepository
+    public class MusicRepository : IMusicRepository
     {
         private readonly SocialNetworkContext _socialNetworkContext;
 
-        public UserRepository(SocialNetworkContext socialNetworkContext)
+        public MusicRepository(SocialNetworkContext socialNetworkContext)
         {
             _socialNetworkContext = socialNetworkContext;
         }
-        public void AddUser(User user)
+        public IQueryable<Music> GetMusic()
         {
-             _socialNetworkContext.Set<User>().Add(user);
+            return _socialNetworkContext.Set<Music>();
         }
 
-        public IQueryable<User> GetUser()
-        {
-            return _socialNetworkContext.Set<User>();
-        }
-
+        
     }
 }

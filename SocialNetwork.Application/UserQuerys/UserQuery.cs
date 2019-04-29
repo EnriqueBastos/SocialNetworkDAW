@@ -1,4 +1,4 @@
-﻿using SocialNetwork.Application.Dtos;
+﻿using SocialNetwork.Domain.Dtos;
 using SocialNetwork.Domain.Business;
 using SocialNetwork.Domain.Contracts;
 using System;

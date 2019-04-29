@@ -2,14 +2,16 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SocialNetwork.Application.Dtos
+namespace SocialNetwork.Domain.Dtos
 {
-    class PhotoDto
+    public class PhotoDto
     {
         public string UserName { get; set; }
 
         public byte[] ImageBytes { get; set; }
 
         public string Title { get; set; }
+
+        public DateTime UploadDateTime { get; set; }
     }
 }

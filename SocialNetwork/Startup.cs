@@ -29,6 +29,8 @@ namespace SocialNetwork
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            DependenciesResolver.registerOn(services);
+
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowMyOrigin",

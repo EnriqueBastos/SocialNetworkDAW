@@ -1,10 +1,22 @@
 ﻿using System;
 
-namespace SocialNetwork.Application.Dtos
+namespace SocialNetwork.Domain.Dtos
 {
     public class UserDto
     {
         public string Name { get; set; }
+
+        public string LastName { get; set; }
+
+
+        public string Email { get; set; }
+
+        public string Password { get; set; }
+
+        public DateTime DateBirthday { get; set; }
+
         public byte[] PhotoProfile { get; set; }
+
+        public string BackgroundApp { get; set; }
     }
 }

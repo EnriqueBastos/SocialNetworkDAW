@@ -1,4 +1,4 @@
-﻿using SocialNetwork.Application.Dtos;
+﻿using SocialNetwork.Domain.Dtos;
 
 namespace SocialNetwork.Application
 {

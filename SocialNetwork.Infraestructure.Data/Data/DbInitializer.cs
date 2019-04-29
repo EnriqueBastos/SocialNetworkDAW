@@ -57,13 +57,13 @@ namespace SocialNetwork.Data
 
             var Musics = new Music[]
             {
-                new Music{ Id = 0, UserId=1, UrlMusic="" },
+                new Music{ Id = 0, UserId=1, UrlVideo="" },
 
-                new Music{ Id = 0, UserId=3, UrlMusic="" },
+                new Music{ Id = 0, UserId=3, UrlVideo="" },
 
-                new Music{ Id = 0, UserId=4, UrlMusic="" },
+                new Music{ Id = 0, UserId=4, UrlVideo="" },
 
-                new Music{ Id = 0, UserId=2, UrlMusic="" }
+                new Music{ Id = 0, UserId=2, UrlVideo="" }
             };
 
             foreach (Music song in Musics)
