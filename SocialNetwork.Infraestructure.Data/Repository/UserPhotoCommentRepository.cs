@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace SocialNetwork.Infraestructure.Repository
 {
@@ -27,14 +28,22 @@ namespace SocialNetwork.Infraestructure.Repository
         public void AddUserPhotoComment(UserPhotoComment comment)
         {
             _socialNetworkContext.Set<UserPhotoComment>().Add(comment);
-            _socialNetworkContext.SaveChanges();
+            
         }
 
         public void DeleteUserPhotoComment(UserPhotoComment comment)
         {
             _socialNetworkContext.Set<UserPhotoComment>().Remove(comment);
 
-            _socialNetworkContext.SaveChanges();
+            
+        }
+
+        public IUnitOfWork UnitOfWork
+        {
+            get
+            {
+                return _socialNetworkContext;
+            }
         }
     }
 }

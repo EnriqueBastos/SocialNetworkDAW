@@ -2,13 +2,15 @@
 using SocialNetwork.Domain.Contracts;
 using SocialNetwork.Domain.Entities;
 using System.Linq;
-
+using System.Threading.Tasks;
 
 namespace SocialNetwork.Infraestructure.Repository
 {
     public class UserRepository : IUserRepository
     {
         private readonly SocialNetworkContext _socialNetworkContext;
+
+        
 
         public UserRepository(SocialNetworkContext socialNetworkContext)
         {
@@ -17,13 +19,13 @@ namespace SocialNetwork.Infraestructure.Repository
         public void AddUser(User user)
         {
              _socialNetworkContext.Set<User>().Add(user);
-             _socialNetworkContext.SaveChanges();
+             
         }
 
         public void DeleteUser(User user)
         {
             _socialNetworkContext.Set<User>().Remove(user);
-            _socialNetworkContext.SaveChanges();
+            
         }
 
         
@@ -31,6 +33,11 @@ namespace SocialNetwork.Infraestructure.Repository
         public IQueryable<User> GetUser()
         {
             return _socialNetworkContext.Set<User>();
+        }
+
+        public IUnitOfWork UnitOfWork
+        {
+            get { return _socialNetworkContext; }
         }
 
     }

@@ -37,7 +37,7 @@ namespace SocialNetwork.Controllers
         [HttpPost]
         public void Post(UserDto user)
         {
-            _userQuery.AddUser(user);
+            //_userQuery.AddUser(user);
         }
 
         // PUT: api/AddUser/5

@@ -1,5 +1,6 @@
 ﻿
 using System.Linq;
+using System.Threading.Tasks;
 using SocialNetwork.Data;
 using SocialNetwork.Domain.Contracts;
 using SocialNetwork.Domain.Entities;
@@ -22,7 +23,7 @@ namespace SocialNetwork.Infraestructure.Repository
         public void DeleteUserPhoto(UserPhoto photo)
         {
              _socialNetworkContext.Set<UserPhoto>().Remove(photo);
-            _socialNetworkContext.SaveChanges();
+            
         }
 
         public void AddUserPhoto(UserPhoto photo)
@@ -30,6 +31,14 @@ namespace SocialNetwork.Infraestructure.Repository
             //_socialNetworkContext.Set<UserPhoto>.Add(photo);
         }
 
-        
+        public IUnitOfWork UnitOfWork
+        {
+            get
+            {
+                return _socialNetworkContext;
+            }
+        }
+
+
     }
 }

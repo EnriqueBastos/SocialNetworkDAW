@@ -5,7 +5,7 @@ using SocialNetwork.Domain.Entities;
 
 namespace SocialNetwork.Domain.Contracts
 {
-    public interface IUserPhotoCommentRepository
+    public interface IUserPhotoCommentRepository : IRepository
     {
         IQueryable<UserPhotoComment> GetUserPhotoComment();
 

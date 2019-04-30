@@ -9,7 +9,7 @@ namespace SocialNetwork.Domain.Entities
     public class Chat
     {
         public int ID { get; set; }
-        public int ChatName { get; set; }
+        public string ChatName { get; set; }
 
         
         

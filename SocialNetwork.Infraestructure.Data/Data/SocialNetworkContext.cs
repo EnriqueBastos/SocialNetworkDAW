@@ -1,11 +1,12 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
+using SocialNetwork.Domain.Contracts;
 using SocialNetwork.Domain.Entities;
-
+using System.Threading.Tasks;
 
 namespace SocialNetwork.Data
 {
-    public class SocialNetworkContext : DbContext
+    public class SocialNetworkContext : DbContext, IUnitOfWork
     {
 
         public SocialNetworkContext(DbContextOptions<SocialNetworkContext> options) : base(options)
@@ -31,7 +32,10 @@ namespace SocialNetwork.Data
 
         public DbSet<MessageChat> MessageChats { get; set; }
 
-
+        public async Task Save()
+        {
+            await SaveChangesAsync();
+        }
 
 
     }

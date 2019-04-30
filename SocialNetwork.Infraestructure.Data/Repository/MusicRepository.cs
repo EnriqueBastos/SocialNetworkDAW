@@ -3,6 +3,7 @@ using SocialNetwork.Domain.Contracts;
 using SocialNetwork.Domain.Entities;
 
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace SocialNetwork.Infraestructure.Repository
 {
@@ -27,6 +28,14 @@ namespace SocialNetwork.Infraestructure.Repository
         public void AddMusic(Music music)
         {
             _socialNetworkContext.Set<Music>().Add(music);
+        }
+
+        public IUnitOfWork UnitOfWork
+        {
+            get
+            {
+                return _socialNetworkContext;
+            }
         }
 
 

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace SocialNetwork.Infraestructure.Repository
 {
@@ -12,10 +13,13 @@ namespace SocialNetwork.Infraestructure.Repository
     {
         private readonly SocialNetworkContext _socialNetworkContext;
 
+        IUnitOfWork IRepository.UnitOfWork => _socialNetworkContext;
+
         public GroupChatRepository(SocialNetworkContext socialNetworkContext)
         {
             _socialNetworkContext = socialNetworkContext;
         }
+
 
         public void AddGroupChat(GroupChat groupChat)
         {
@@ -32,6 +36,5 @@ namespace SocialNetwork.Infraestructure.Repository
             return _socialNetworkContext.Set<GroupChat>();
         }
 
-        
     }
 }

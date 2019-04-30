@@ -14,15 +14,13 @@ namespace SocialNetwork.Application
 
         private readonly IGetUserBusiness _getUserBusiness;
 
-        private readonly IAddUserBusiness _addUserBusiness;
-
-        public UserQuery(IGetProfileBusiness getProfileBusiness , IGetUserBusiness getUserBusiness, IAddUserBusiness addUserBusiness)
+        public UserQuery(IGetProfileBusiness getProfileBusiness , IGetUserBusiness getUserBusiness)
         {
             _getProfileBusiness = getProfileBusiness;
 
             _getUserBusiness = getUserBusiness;
 
-            _addUserBusiness = addUserBusiness;
+            
         }
 
         public UserDto GetProfile(int userId)
@@ -32,10 +30,7 @@ namespace SocialNetwork.Application
 
         }
 
-        public void AddUser(UserDto user)
-        {
-            _addUserBusiness.AddUser(user);
-        }
+        
 
         
     }

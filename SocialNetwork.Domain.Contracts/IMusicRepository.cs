@@ -6,7 +6,7 @@ using System.Text;
 
 namespace SocialNetwork.Domain.Contracts
 {
-    public interface IMusicRepository
+    public interface IMusicRepository : IRepository
     {
         IQueryable<Music> GetMusic();
 
