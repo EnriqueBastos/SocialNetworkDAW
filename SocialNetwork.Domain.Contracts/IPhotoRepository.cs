@@ -7,5 +7,7 @@ namespace SocialNetwork.Domain.Contracts
     public interface IPhotoRepository : IRepository
     {
         void AddPhoto(Photo photo);
+
+        void DeletePhoto(Photo photo);
     }
 }

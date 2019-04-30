@@ -11,6 +11,6 @@ namespace SocialNetwork.Application
 
         PhotoDto GetPhotoByPhotoId(int PhotoId);
 
-        void DeletePhoto(int PhotoId);
+        
     }
 }

@@ -19,6 +19,12 @@ namespace SocialNetwork.Infraestructure.Repository
             _socialNetworkContext.Set<Photo>().Add(photo);
         }
 
+        public void DeletePhoto(Photo photo)
+        {
+            _socialNetworkContext.Set<Photo>().Remove(photo);
+
+        }
+
         public IUnitOfWork UnitOfWork
         {
             get

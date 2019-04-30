@@ -7,13 +7,13 @@ using SocialNetwork.Domain.Dtos;
 
 namespace SocialNetwork.Domain.Business.PhotoCommentBusiness
 {
-    public class DeleteUserPhotoBusiness : IDeleteUserPhotoBusiness
+    public class DeletePhotoBusiness : IDeleteUserPhotoBusiness
     {
         private readonly IUserPhotoRepository _photoRepository;
 
         private readonly IGetUserPhotoBusiness _getPhoto;
 
-        public DeleteUserPhotoBusiness(IUserPhotoRepository photoRepository, IGetUserPhotoBusiness getPhoto)
+        public DeletePhotoBusiness(IUserPhotoRepository photoRepository, IGetUserPhotoBusiness getPhoto)
         {
             _photoRepository = photoRepository;
 
@@ -21,7 +21,7 @@ namespace SocialNetwork.Domain.Business.PhotoCommentBusiness
         
         }
 
-        public void DeletePhoto(int PhotoId)
+        public void DeletePhotoByPhotoId(int PhotoId)
         {
             var userPhoto = _getPhoto.GetUserPhotoById(PhotoId);
             _photoRepository.DeleteUserPhoto(userPhoto);

@@ -10,24 +10,12 @@ namespace SocialNetwork.Application.MusicQuerys
     {
         private readonly IGetMusicBusiness _getMusic;
 
-        private readonly IDeleteMusicBusiness _deleteMusic;
 
-        private readonly IAddMusicBusiness _addMusic;
-
-        public MusicQuery(IGetMusicBusiness getMusic 
-            , IDeleteMusicBusiness delteMusic
-            ,IAddMusicBusiness addMusic)
+        public MusicQuery(IGetMusicBusiness getMusic)
         {
             _getMusic = getMusic;
 
-            _deleteMusic = delteMusic;
-
-            _addMusic = addMusic;
-        }
-
-        public void DeleteMusicByMusicDto (MusicDto music)
-        {
-            _deleteMusic.DeleteMusicByMusicDto(music);
+            
         }
 
         public IList<MusicDto> GetListMusic(int UserId)
@@ -35,9 +23,6 @@ namespace SocialNetwork.Application.MusicQuerys
             return _getMusic.GetListMusic(UserId);
         }
 
-        public void AddMusic(MusicDto music)
-        {
-            _addMusic.AddMusic(music);
-        }
+       
     }
 }

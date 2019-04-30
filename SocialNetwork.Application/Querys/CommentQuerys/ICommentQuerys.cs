@@ -5,8 +5,8 @@ namespace SocialNetwork.Application.CommentQuerys
 {
     public interface ICommentQuerys
     {
-        void AddComment(CommentDto comment);
-        void DeleteCommenet(CommentDto comment);
+        
+        
 
         IList<CommentDto> GetCommentsByPhotoId(int idPhoto);
     }

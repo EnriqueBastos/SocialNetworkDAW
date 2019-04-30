@@ -13,28 +13,19 @@ namespace SocialNetwork.Application.CommentQuerys
 
         private readonly IGetUserPhotoCommentsBusiness _getCommentsBusiness;
 
-        private readonly IDeleteUserPhotoCommentBusiness _deleteCommentBusiness;
+        
 
         public CommentQuerys(IAddUserPhotoCommentBusiness addCommentBusiness,
-            IGetUserPhotoCommentsBusiness getCommentsBusiness,
-            IDeleteUserPhotoCommentBusiness deleteCommentBusiness)
+            IGetUserPhotoCommentsBusiness getCommentsBusiness)
         {
             _addCommentBusiness = addCommentBusiness;
 
             _getCommentsBusiness = getCommentsBusiness;
 
-            _deleteCommentBusiness = deleteCommentBusiness;
+            
 
         }
-        public void AddComment(CommentDto comment)
-        {
-            _addCommentBusiness.AddUserPhotoComment(comment);
-        }
-
-        public void DeleteCommenet(CommentDto comment)
-        {
-            _deleteCommentBusiness.DeleteUserPhotoCommentByCommentDto(comment);
-        }
+      
 
         public IList<CommentDto> GetCommentsByPhotoId(int idPhoto)
         {

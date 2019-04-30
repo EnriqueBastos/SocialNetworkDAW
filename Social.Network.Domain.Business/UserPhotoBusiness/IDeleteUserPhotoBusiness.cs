@@ -6,6 +6,6 @@ namespace SocialNetwork.Domain.Business.PhotoCommentBusiness
 {
     public interface IDeleteUserPhotoBusiness
     {
-        void DeletePhoto(int PhotoId);
+        void DeletePhotoByPhotoId(int PhotoId);
     }
 }

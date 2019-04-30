@@ -9,8 +9,6 @@ namespace SocialNetwork.Application.MusicQuerys
     {
         IList<MusicDto> GetListMusic(int UserId);
 
-        void DeleteMusicByMusicDto (MusicDto music);
-
         void AddMusic(MusicDto music);
     }
 }

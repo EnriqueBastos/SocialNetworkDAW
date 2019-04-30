@@ -20,7 +20,7 @@ namespace SocialNetwork
             services.AddTransient<IGetLastUserPhotosBusiness, GetLastUserPhotosBusiness>();
             services.AddTransient<IUserPhotoRepository, UserPhotoRepository>();
             services.AddTransient<IGetUserPhotoBusiness,GetUserPhotoBusiness>();
-            services.AddTransient<IDeleteUserPhotoBusiness, DeleteUserPhotoBusiness>();
+            services.AddTransient<IDeleteUserPhotoBusiness, DeletePhotoBusiness>();
 
             services.AddTransient<IMusicQuery, MusicQuery>();
             services.AddTransient<IGetMusicBusiness, GetMusicBusiness>();

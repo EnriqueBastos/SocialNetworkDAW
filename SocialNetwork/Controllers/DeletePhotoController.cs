@@ -29,7 +29,7 @@ namespace SocialNetwork.Controllers
         [HttpGet("{id}", Name = "DeletePhoto")]
         public void Get(int id)
         {
-            _photoQuerys.DeletePhoto(id);
+            //_photoQuerys.DeletePhoto(id);
         }
 
         // POST: api/DeletePhoto

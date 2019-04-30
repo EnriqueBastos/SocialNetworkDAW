@@ -32,9 +32,6 @@ namespace SocialNetwork.Application
             return _getPhoto.GetPhotoDtoByPhotoId(PhotoId);
         }
 
-        public void DeletePhoto(int PhotoId)
-        {
-            _deletePhoto.DeletePhoto(PhotoId);
-        }
+        
     }
 }
