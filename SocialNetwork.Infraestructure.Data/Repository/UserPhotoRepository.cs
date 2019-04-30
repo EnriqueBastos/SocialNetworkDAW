@@ -1,4 +1,4 @@
-﻿using System;
+﻿
 using System.Linq;
 using SocialNetwork.Data;
 using SocialNetwork.Domain.Contracts;
@@ -14,9 +14,22 @@ namespace SocialNetwork.Infraestructure.Repository
         {
             _socialNetworkContext = socialNetworkContext;
         }
-        public IQueryable<UserPhoto> GetListPhoto()
+        public IQueryable<UserPhoto> GetUserPhoto()
         {
-           return _socialNetworkContext.Set<UserPhoto>();
+            return _socialNetworkContext.Set<UserPhoto>();
         }
+
+        public void DeleteUserPhoto(UserPhoto photo)
+        {
+             _socialNetworkContext.Set<UserPhoto>().Remove(photo);
+            _socialNetworkContext.SaveChanges();
+        }
+
+        public void AddUserPhoto(UserPhoto photo)
+        {
+            //_socialNetworkContext.Set<UserPhoto>.Add(photo);
+        }
+
+        
     }
 }

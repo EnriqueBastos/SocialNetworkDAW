@@ -1,6 +1,4 @@
 ﻿
-using System;
-using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using SocialNetwork.Domain.Entities;
 

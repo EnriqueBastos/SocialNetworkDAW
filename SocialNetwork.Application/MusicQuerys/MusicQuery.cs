@@ -6,18 +6,38 @@ using System.Text;
 
 namespace SocialNetwork.Application.MusicQuerys
 {
-    public class MusicQuery : IMusicQuerys
+    public class MusicQuery : IMusicQuery
     {
         private readonly IGetMusicBusiness _getMusic;
 
-        public MusicQuery(IGetMusicBusiness getMusic)
+        private readonly IDeleteMusicBusiness _deleteMusic;
+
+        private readonly IAddMusicBusiness _addMusic;
+
+        public MusicQuery(IGetMusicBusiness getMusic 
+            , IDeleteMusicBusiness delteMusic
+            ,IAddMusicBusiness addMusic)
         {
             _getMusic = getMusic;
+
+            _deleteMusic = delteMusic;
+
+            _addMusic = addMusic;
+        }
+
+        public void DeleteMusicByMusicDto (MusicDto music)
+        {
+            _deleteMusic.DeleteMusicByMusicDto(music);
         }
 
         public IList<MusicDto> GetListMusic(int UserId)
         {
             return _getMusic.GetListMusic(UserId);
+        }
+
+        public void AddMusic(MusicDto music)
+        {
+            _addMusic.AddMusic(music);
         }
     }
 }

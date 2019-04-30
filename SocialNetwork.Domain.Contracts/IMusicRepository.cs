@@ -9,5 +9,9 @@ namespace SocialNetwork.Domain.Contracts
     public interface IMusicRepository
     {
         IQueryable<Music> GetMusic();
+
+        void DeleteMusic(Music music);
+
+        void AddMusic(Music music);
     }
 }

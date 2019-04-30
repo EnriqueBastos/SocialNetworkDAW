@@ -17,7 +17,16 @@ namespace SocialNetwork.Infraestructure.Repository
         public void AddUser(User user)
         {
              _socialNetworkContext.Set<User>().Add(user);
+             _socialNetworkContext.SaveChanges();
         }
+
+        public void DeleteUser(User user)
+        {
+            _socialNetworkContext.Set<User>().Remove(user);
+            _socialNetworkContext.SaveChanges();
+        }
+
+        
 
         public IQueryable<User> GetUser()
         {

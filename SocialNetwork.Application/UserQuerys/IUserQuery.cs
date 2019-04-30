@@ -5,5 +5,7 @@ namespace SocialNetwork.Application
     public interface IUserQuery
     {
         UserDto GetProfile(int userId);
+
+        void AddUser(UserDto userDto);
     }
 }

@@ -6,11 +6,11 @@ using SocialNetwork.Domain.Dtos;
 
 namespace SocialNetwork.Domain.Business
 {
-    public class GetCommentsBusiness
+    public class GetUserPhotoCommentsBusiness : IGetUserPhotoCommentsBusiness
     {
-        private readonly ICommentRepository _commentRepository;
+        private readonly IUserPhotoCommentRepository _commentRepository;
 
-        public GetCommentsBusiness(ICommentRepository commentRepository)
+        public GetUserPhotoCommentsBusiness(IUserPhotoCommentRepository commentRepository)
         {
             _commentRepository = commentRepository;
         }
@@ -18,10 +18,11 @@ namespace SocialNetwork.Domain.Business
         public IList<CommentDto> GetComments(int idPhoto)
         {
             return _commentRepository
-                .GetComments()
+                .GetUserPhotoComment()
                 .Select(comment =>
                 new CommentDto
                 {
+
                     UserName = comment.User.Name,
                     CommentText = comment.CommentText,
                     PhotoId = comment.UserPhotoId

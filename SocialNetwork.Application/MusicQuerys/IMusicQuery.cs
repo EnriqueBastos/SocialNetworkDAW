@@ -5,8 +5,12 @@ using System.Text;
 
 namespace SocialNetwork.Application.MusicQuerys
 {
-    public interface IMusicQuerys
+    public interface IMusicQuery
     {
         IList<MusicDto> GetListMusic(int UserId);
+
+        void DeleteMusicByMusicDto (MusicDto music);
+
+        void AddMusic(MusicDto music);
     }
 }

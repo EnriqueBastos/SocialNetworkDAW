@@ -29,7 +29,7 @@ namespace SocialNetwork
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            DependenciesResolver.registerOn(services);
+            DependenciesResolver.RegisterOn(services);
 
             services.AddCors(options =>
             {

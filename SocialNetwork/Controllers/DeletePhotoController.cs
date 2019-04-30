@@ -5,44 +5,40 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SocialNetwork.Application;
-using SocialNetwork.Domain.Dtos;
 
 namespace SocialNetwork.Controllers
 {
-   
-
     [Route("api/[controller]")]
     [ApiController]
-    public class LastPhotosController : ControllerBase
+    public class DeletePhotoController : ControllerBase
     {
-        private readonly IUserPhotoQuery _lastPhotosQuery;
+        private readonly IUserPhotoQuery _photoQuerys;
 
-        public LastPhotosController(IUserPhotoQuery lastPhotosQuery)
+        public DeletePhotoController(IUserPhotoQuery photoQuerys)
         {
-            _lastPhotosQuery = lastPhotosQuery;
+            _photoQuerys = photoQuerys;
         }
-
-        // GET: api/LastPhotos
+        // GET: api/DeletePhoto
         [HttpGet]
-        public IList<PhotoDto> Get()
+        public IEnumerable<string> Get()
         {
-            return _lastPhotosQuery.GetLastPhotos() ;
+            return new string[] { "value1", "value2" };
         }
 
-        // GET: api/LastPhotos/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        // GET: api/DeletePhoto/5
+        [HttpGet("{id}", Name = "DeletePhoto")]
+        public void Get(int id)
         {
-            return "value";
+            _photoQuerys.DeletePhoto(id);
         }
 
-        // POST: api/LastPhotos
+        // POST: api/DeletePhoto
         [HttpPost]
         public void Post([FromBody] string value)
         {
         }
 
-        // PUT: api/LastPhotos/5
+        // PUT: api/DeletePhoto/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {

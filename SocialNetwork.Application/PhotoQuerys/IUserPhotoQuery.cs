@@ -5,8 +5,12 @@ using System.Text;
 
 namespace SocialNetwork.Application
 {
-    public interface IPhotoQuerys
+    public interface IUserPhotoQuery
     {
         IList<PhotoDto> GetLastPhotos();
+
+        PhotoDto GetPhotoByPhotoId(int PhotoId);
+
+        void DeletePhoto(int PhotoId);
     }
 }

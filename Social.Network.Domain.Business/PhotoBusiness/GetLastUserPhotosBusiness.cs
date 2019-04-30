@@ -7,18 +7,18 @@ using SocialNetwork.Domain.Contracts;
 
 namespace SocialNetwork.Domain.Business
 {
-    public class GetLastPhotosBusiness : IGetLastPhotosBusiness
+    public class GetLastUserPhotosBusiness : IGetLastUserPhotosBusiness
     {
         public readonly IUserPhotoRepository _photoRepository;
 
-        public GetLastPhotosBusiness(IUserPhotoRepository photoRepository)
+        public GetLastUserPhotosBusiness(IUserPhotoRepository photoRepository)
         {
             _photoRepository = photoRepository;
         }
         public IList<PhotoDto> GetLastPhotos()
         {
             return _photoRepository
-                .GetListPhoto()
+                .GetUserPhoto()
                 .OrderByDescending(photo => photo)
                 .Select(photo =>
                 new PhotoDto {

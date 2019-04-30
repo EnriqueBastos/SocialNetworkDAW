@@ -9,40 +9,37 @@ using SocialNetwork.Domain.Dtos;
 
 namespace SocialNetwork.Controllers
 {
-   
-
     [Route("api/[controller]")]
     [ApiController]
-    public class LastPhotosController : ControllerBase
+    public class PhotoController : ControllerBase
     {
-        private readonly IUserPhotoQuery _lastPhotosQuery;
+        private readonly IUserPhotoQuery _photoQuerys;
 
-        public LastPhotosController(IUserPhotoQuery lastPhotosQuery)
+        public PhotoController(IUserPhotoQuery photoQuerys)
         {
-            _lastPhotosQuery = lastPhotosQuery;
+            _photoQuerys = photoQuerys;
         }
-
-        // GET: api/LastPhotos
+        // GET: api/Photo
         [HttpGet]
-        public IList<PhotoDto> Get()
+        public void Get()
         {
-            return _lastPhotosQuery.GetLastPhotos() ;
+            
         }
 
-        // GET: api/LastPhotos/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        // GET: api/Photo/5
+        [HttpGet("{id}", Name = "GetPhotoById")]
+        public PhotoDto Get(int id)
         {
-            return "value";
+            return _photoQuerys.GetPhotoByPhotoId(id);
         }
 
-        // POST: api/LastPhotos
+        // POST: api/Photo
         [HttpPost]
         public void Post([FromBody] string value)
         {
         }
 
-        // PUT: api/LastPhotos/5
+        // PUT: api/Photo/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {

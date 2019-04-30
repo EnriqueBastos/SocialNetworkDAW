@@ -13,9 +13,9 @@ namespace SocialNetwork.Controllers
     [ApiController]
     public class ListMusicController : ControllerBase
     {
-        private readonly IMusicQuerys _musicQuerys;
+        private readonly IMusicQuery _musicQuerys;
 
-        public ListMusicController(IMusicQuerys musicQuerys)
+        public ListMusicController(IMusicQuery musicQuerys)
         {
             _musicQuerys = musicQuerys;
         }

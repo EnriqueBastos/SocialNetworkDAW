@@ -1,5 +1,5 @@
 ﻿using SocialNetwork.Domain.Entities;
-using System;
+
 using System.Linq;
 
 namespace SocialNetwork.Domain.Contracts
@@ -8,6 +8,9 @@ namespace SocialNetwork.Domain.Contracts
     {
         IQueryable<User> GetUser();
 
-        //void AddUser();
+        void AddUser(User user);
+
+        void DeleteUser(User user);
+        
     }
 }
