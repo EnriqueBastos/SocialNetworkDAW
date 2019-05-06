@@ -18,9 +18,9 @@ namespace SocialNetwork.Application.MusicQuerys
             
         }
 
-        public IList<MusicDto> GetListMusic(int UserId)
+        public IList<MusicDto> GetListMusicByUserId(int UserId)
         {
-            return _getMusic.GetListMusic(UserId);
+            return _getMusic.GetListMusicByUserId(UserId);
         }
 
        

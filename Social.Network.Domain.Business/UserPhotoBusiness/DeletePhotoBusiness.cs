@@ -23,7 +23,7 @@ namespace SocialNetwork.Domain.Business.PhotoCommentBusiness
 
         public void DeletePhotoByPhotoId(int PhotoId)
         {
-            var userPhoto = _getPhoto.GetUserPhotoById(PhotoId);
+            var userPhoto = _getPhoto.GetUserPhotoByPhotoId(PhotoId);
             _photoRepository.DeleteUserPhoto(userPhoto);
         }
 

@@ -12,13 +12,13 @@ namespace SocialNetwork.Infraestructure.Migrations
                 name: "Chats",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ChatName = table.Column<int>(nullable: false)
+                    ChatName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Chats", x => x.ID);
+                    table.PrimaryKey("PK_Chats", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -50,7 +50,8 @@ namespace SocialNetwork.Infraestructure.Migrations
                     Password = table.Column<string>(nullable: true),
                     DateBirthday = table.Column<DateTime>(nullable: false),
                     PhotoProfile = table.Column<byte[]>(nullable: true),
-                    BackgroundApp = table.Column<string>(nullable: true)
+                    BackgroundApp = table.Column<string>(nullable: true),
+                    Private = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -93,7 +94,7 @@ namespace SocialNetwork.Infraestructure.Migrations
                         name: "FK_GroupChats_Chats_ChatId",
                         column: x => x.ChatId,
                         principalTable: "Chats",
-                        principalColumn: "ID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_GroupChats_Users_UserId",
@@ -121,7 +122,7 @@ namespace SocialNetwork.Infraestructure.Migrations
                         name: "FK_MessageChats_Chats_ChatId",
                         column: x => x.ChatId,
                         principalTable: "Chats",
-                        principalColumn: "ID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_MessageChats_Users_UserId",
@@ -138,7 +139,7 @@ namespace SocialNetwork.Infraestructure.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     UserId = table.Column<int>(nullable: false),
-                    UrlMusic = table.Column<string>(nullable: true)
+                    UrlVideo = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -196,7 +197,11 @@ namespace SocialNetwork.Infraestructure.Migrations
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    
+                    table.ForeignKey(
+                        name: "FK_UserPhotoComments_UserPhotos_UserPhotoId",
+                        column: x => x.UserPhotoId,
+                        principalTable: "UserPhotos",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(

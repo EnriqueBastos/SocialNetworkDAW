@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace SocialNetwork.Domain.Entities
 {
@@ -10,7 +9,6 @@ namespace SocialNetwork.Domain.Entities
         public string Name { get; set; }
 
         public string LastName { get; set; }
-
 
         public string Email { get; set; }
 
@@ -22,11 +20,11 @@ namespace SocialNetwork.Domain.Entities
 
         public string BackgroundApp { get; set; }
 
-        //public ICollection<UserPhoto> UserPhotos { get; set; }
+        public bool Private { get; set; }
 
-        //public ICollection<PhotoComment> PhotoComments { get; set; }
+        public ICollection<Contact> Contacts { get; set; }
 
-       public ICollection<UserPhotoComment> UserPhotoComments { get; set; }
+        public ICollection<UserPhotoComment> UserPhotoComments { get; set; }
 
         public ICollection<Music> Musics { get; set; }
 

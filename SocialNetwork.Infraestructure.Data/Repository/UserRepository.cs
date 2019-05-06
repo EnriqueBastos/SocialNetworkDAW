@@ -1,8 +1,8 @@
-﻿using SocialNetwork.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using SocialNetwork.Data;
 using SocialNetwork.Domain.Contracts;
 using SocialNetwork.Domain.Entities;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace SocialNetwork.Infraestructure.Repository
 {
@@ -18,7 +18,7 @@ namespace SocialNetwork.Infraestructure.Repository
         }
         public void AddUser(User user)
         {
-             _socialNetworkContext.Set<User>().Add(user);
+             _socialNetworkContext.Set<User>().AddAsync(user);
              
         }
 
@@ -28,7 +28,10 @@ namespace SocialNetwork.Infraestructure.Repository
             
         }
 
-        
+        public void EditUser(User user)
+        {
+            _socialNetworkContext.Entry(user).State = EntityState.Modified;
+        }
 
         public IQueryable<User> GetUser()
         {

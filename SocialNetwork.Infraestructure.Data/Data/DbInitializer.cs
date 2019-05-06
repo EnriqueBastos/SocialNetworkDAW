@@ -35,6 +35,8 @@ namespace SocialNetwork.Data
                 Context.Users.Add(User);
             }
 
+           
+
             Context.SaveChanges();
 
             var Photos = new Photo[]

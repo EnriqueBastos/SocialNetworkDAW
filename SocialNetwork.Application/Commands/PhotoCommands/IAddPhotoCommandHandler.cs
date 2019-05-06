@@ -5,6 +5,6 @@ namespace SocialNetwork.Application.Commands.PhotoCommands
 {
     public interface IAddPhotoCommandHandler
     {
-        Task Handler(PhotoDto photo);
+        Task Handler(PhotoDetailsDto photo);
     }
 }

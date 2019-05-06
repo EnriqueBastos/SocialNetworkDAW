@@ -7,9 +7,11 @@ namespace SocialNetwork.Application
 {
     public interface IUserPhotoQuery
     {
-        IList<PhotoDto> GetLastPhotos();
+        IList<PhotoDetailsDto> GetLastPhotos();
 
-        PhotoDto GetPhotoByPhotoId(int PhotoId);
+        PhotoDetailsDto GetPhotoByPhotoId(int PhotoId);
+
+        IList<PhotoDetailsDto> GetListPhotosByUserId(int userId);
 
         
     }

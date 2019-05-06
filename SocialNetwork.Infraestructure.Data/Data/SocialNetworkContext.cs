@@ -19,7 +19,6 @@ namespace SocialNetwork.Data
 
         public DbSet<Music> Musics { get; set; }
 
-       
         public DbSet<UserPhotoComment> UserPhotoComments { get; set; }
 
         public DbSet<UserPhoto> UserPhotos { get; set; }

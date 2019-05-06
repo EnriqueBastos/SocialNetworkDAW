@@ -5,7 +5,7 @@ namespace SocialNetwork.Application.Commands.MusicCommands
 {
     public interface IDeleteMusicCommandHandler
     {
-        Task Handler(MusicDto music);
+        Task Handler(int musicId);
 
     }
 }

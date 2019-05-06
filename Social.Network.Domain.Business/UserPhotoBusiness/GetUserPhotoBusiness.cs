@@ -13,11 +13,11 @@ namespace SocialNetwork.Domain.Business.PhotoCommentBusiness
             _userPhotoRepository = userPhotoRepository;
         }
 
-        public PhotoDto GetPhotoDtoByPhotoId(int PhotoId)
+        public PhotoDetailsDto GetPhotoDetailsDtoByPhotoId(int PhotoId)
         {
              return _userPhotoRepository
                 .GetUserPhoto()
-                .Select(photo => new PhotoDto
+                .Select(photo => new PhotoDetailsDto
                 {
                     UserName = photo.User.Name,
                     ImageBytes = photo.Photo.ImageBytes,
@@ -29,11 +29,11 @@ namespace SocialNetwork.Domain.Business.PhotoCommentBusiness
             
         }
 
-        public UserPhoto GetUserPhotoById(int PhotoId)
+        public UserPhoto GetUserPhotoByPhotoId(int PhotoId)
         {
             return _userPhotoRepository
-                .GetUserPhoto().FirstOrDefault(photo =>
-                photo.Id == PhotoId
+                .GetUserPhoto().FirstOrDefault(userPhoto =>
+                userPhoto.Photo.Id == PhotoId
                );
         }
     }

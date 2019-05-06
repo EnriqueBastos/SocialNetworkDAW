@@ -1,6 +1,5 @@
 ﻿using SocialNetwork.Data;
 using SocialNetwork.Domain.Entities;
-using System.Threading.Tasks;
 using SocialNetwork.Domain.Contracts;
 
 namespace SocialNetwork.Infraestructure.Repository
@@ -17,6 +16,11 @@ namespace SocialNetwork.Infraestructure.Repository
         public void AddChat(Chat chat)
         {
             _socialNetworkContext.Set<Chat>().Add(chat);
+        }
+
+        public void DeleteChat(Chat chat)
+        {
+            _socialNetworkContext.Set<Chat>().Remove(chat);
         }
 
         public IUnitOfWork UnitOfWork

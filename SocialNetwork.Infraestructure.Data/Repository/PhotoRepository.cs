@@ -1,4 +1,5 @@
-﻿using SocialNetwork.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using SocialNetwork.Data;
 using SocialNetwork.Domain.Contracts;
 using SocialNetwork.Domain.Entities;
 
@@ -23,6 +24,11 @@ namespace SocialNetwork.Infraestructure.Repository
         {
             _socialNetworkContext.Set<Photo>().Remove(photo);
 
+        }
+
+        public void EditPhoto(Photo photo)
+        {
+            _socialNetworkContext.Entry(photo).State = EntityState.Modified;
         }
 
         public IUnitOfWork UnitOfWork

@@ -13,7 +13,10 @@ namespace SocialNetwork.Domain.Contracts
 
         void DeleteUser(User user);
 
-        
+        void EditUser(User user);
+
+
+
 
     }
 }

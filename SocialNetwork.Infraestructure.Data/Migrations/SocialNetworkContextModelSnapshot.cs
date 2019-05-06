@@ -21,13 +21,13 @@ namespace SocialNetwork.Infraestructure.Migrations
 
             modelBuilder.Entity("SocialNetwork.Domain.Entities.Chat", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ChatName");
+                    b.Property<string>("ChatName");
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
                     b.ToTable("Chats");
                 });
@@ -91,6 +91,23 @@ namespace SocialNetwork.Infraestructure.Migrations
                     b.ToTable("MessageChats");
                 });
 
+            modelBuilder.Entity("SocialNetwork.Domain.Entities.Music", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("UrlVideo");
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Musics");
+                });
+
             modelBuilder.Entity("SocialNetwork.Domain.Entities.Photo", b =>
                 {
                     b.Property<int>("Id")
@@ -131,6 +148,8 @@ namespace SocialNetwork.Infraestructure.Migrations
                     b.Property<string>("Password");
 
                     b.Property<byte[]>("PhotoProfile");
+
+                    b.Property<bool>("Private");
 
                     b.HasKey("Id");
 
@@ -177,27 +196,10 @@ namespace SocialNetwork.Infraestructure.Migrations
                     b.ToTable("UserPhotoComments");
                 });
 
-            modelBuilder.Entity("SocialNetwork.Domain.Entities.Video", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("UrlVideo");
-
-                    b.Property<int>("UserId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Musics");
-                });
-
             modelBuilder.Entity("SocialNetwork.Domain.Entities.Contact", b =>
                 {
                     b.HasOne("SocialNetwork.Domain.Entities.User", "User")
-                        .WithMany()
+                        .WithMany("Contacts")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
@@ -228,6 +230,14 @@ namespace SocialNetwork.Infraestructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("SocialNetwork.Domain.Entities.Music", b =>
+                {
+                    b.HasOne("SocialNetwork.Domain.Entities.User", "User")
+                        .WithMany("Musics")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("SocialNetwork.Domain.Entities.UserPhoto", b =>
                 {
                     b.HasOne("SocialNetwork.Domain.Entities.Photo", "Photo")
@@ -251,14 +261,6 @@ namespace SocialNetwork.Infraestructure.Migrations
                     b.HasOne("SocialNetwork.Domain.Entities.UserPhoto")
                         .WithMany("UserPhotoComments")
                         .HasForeignKey("UserPhotoId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("SocialNetwork.Domain.Entities.Video", b =>
-                {
-                    b.HasOne("SocialNetwork.Domain.Entities.User", "User")
-                        .WithMany("Musics")
-                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

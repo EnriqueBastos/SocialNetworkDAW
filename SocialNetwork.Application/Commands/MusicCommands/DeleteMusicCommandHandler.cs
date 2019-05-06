@@ -15,9 +15,9 @@ namespace SocialNetwork.Application.Commands.MusicCommands
             _musicRepository = musicRepository;
         }
 
-        public async Task Handler(MusicDto music)
+        public async Task Handler(int musicId)
         {
-            _deleteMusicBusiness.DeleteMusicByMusicDto(music);
+            _deleteMusicBusiness.DeleteMusicByMusicId(musicId);
 
             await _musicRepository.UnitOfWork.Save();
         }

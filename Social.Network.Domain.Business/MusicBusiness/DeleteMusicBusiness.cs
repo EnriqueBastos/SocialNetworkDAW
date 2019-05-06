@@ -12,18 +12,21 @@ namespace SocialNetwork.Domain.Business.MusicBusiness
     {
         private readonly IMusicRepository _musicRepository;
 
-        public DeleteMusicBusiness(IMusicRepository musicRepository) {
+        public DeleteMusicBusiness(IMusicRepository musicRepository)
+        {
 
             _musicRepository = musicRepository;
         }
 
-        public void DeleteMusicByMusicDto(MusicDto music)
+        public void DeleteMusicByMusicId(int musicId)
         {
-            _musicRepository.DeleteMusic(new Music {
-                Id = music.MusicId,
-                UserId = music.UserId,
-                UrlVideo = music.UrlVideo
-            });
+            var musicDto = _musicRepository
+                .GetMusic()
+                .FirstOrDefault(music =>
+                music.Id == musicId
+                );
+            _musicRepository.DeleteMusic(musicDto);
+            
         }
     }
 }

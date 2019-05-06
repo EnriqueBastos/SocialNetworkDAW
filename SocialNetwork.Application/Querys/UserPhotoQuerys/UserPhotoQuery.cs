@@ -9,29 +9,35 @@ namespace SocialNetwork.Application
 {
     public class PhotosQuery : IUserPhotoQuery
     {
-        private readonly IGetLastUserPhotosBusiness _getLastPhotos;
+        private readonly IGetListUserPhotosBusiness _getListPhotos;
 
         private readonly IGetUserPhotoBusiness _getPhoto;
 
         private readonly IDeleteUserPhotoBusiness _deletePhoto;
 
-        public PhotosQuery(IGetLastUserPhotosBusiness getLastPhotos, IGetUserPhotoBusiness getPhoto, IDeleteUserPhotoBusiness deletePhoto)
+        public PhotosQuery(IGetListUserPhotosBusiness getListPhotos, IGetUserPhotoBusiness getPhoto, IDeleteUserPhotoBusiness deletePhoto)
         {
-            _getLastPhotos = getLastPhotos;
+            _getListPhotos = getListPhotos;
             _getPhoto = getPhoto;
             _deletePhoto = deletePhoto;
         }
 
-        public IList<PhotoDto> GetLastPhotos()
+        public IList<PhotoDetailsDto> GetLastPhotos()
         {
-            return _getLastPhotos.GetLastPhotos();
+            return _getListPhotos.GetLastPhotos();
         }
 
-        public PhotoDto GetPhotoByPhotoId(int PhotoId)
+        public PhotoDetailsDto GetPhotoByPhotoId(int PhotoId)
         {
-            return _getPhoto.GetPhotoDtoByPhotoId(PhotoId);
+            return _getPhoto.GetPhotoDetailsDtoByPhotoId(PhotoId);
         }
 
+        public IList<PhotoDetailsDto> GetListPhotosByUserId(int userId)
+        {
+            return _getListPhotos.GetListPhotosByUserId(userId);
+        }
         
+
+
     }
 }

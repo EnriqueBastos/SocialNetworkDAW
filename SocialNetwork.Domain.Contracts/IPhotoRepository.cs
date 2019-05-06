@@ -9,5 +9,7 @@ namespace SocialNetwork.Domain.Contracts
         void AddPhoto(Photo photo);
 
         void DeletePhoto(Photo photo);
+
+        void EditPhoto(Photo photo);
     }
 }

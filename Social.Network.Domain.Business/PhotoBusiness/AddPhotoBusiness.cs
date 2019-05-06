@@ -13,13 +13,13 @@ namespace SocialNetwork.Domain.Business.PhotoBusiness
             _photoRepository = photoRepository;
         }
 
-        public void AddPhoto(PhotoDto photo)
+        public void AddPhoto(PhotoDetailsDto photoDto)
         {
             _photoRepository.AddPhoto(new Photo
             {
-                Title = photo.Title,
-                ImageBytes = photo.ImageBytes,
-                UpdateDateTime = photo.UploadDateTime,
+                Title = photoDto.Title,
+                ImageBytes = photoDto.ImageBytes,
+                UpdateDateTime = photoDto.UploadDateTime,
                 Likes = 0,
                 Dislikes = 0
             });

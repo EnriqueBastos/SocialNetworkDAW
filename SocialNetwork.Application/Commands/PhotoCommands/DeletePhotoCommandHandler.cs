@@ -18,7 +18,7 @@ namespace SocialNetwork.Application.Commands.PhotoCommands
 
         }
 
-        public async Task Handler(PhotoDto photo)
+        public async Task Handler(PhotoDetailsDto photo)
         {
             _deleteUserPhotoBusiness.DeletePhoto(photo);
 

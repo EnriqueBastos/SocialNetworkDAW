@@ -3,7 +3,8 @@
 namespace SocialNetwork.Domain.Business.MusicBusiness
 {
     public interface IDeleteMusicBusiness
-    {
-        void DeleteMusicByMusicDto(MusicDto music);
+    { 
+
+        void DeleteMusicByMusicId(int musicId);
     }
 }

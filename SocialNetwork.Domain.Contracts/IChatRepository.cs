@@ -9,5 +9,7 @@ namespace SocialNetwork.Domain.Contracts
     {
         void AddChat(Chat chat);
 
+        void DeleteChat(Chat chat);
+
     }
 }

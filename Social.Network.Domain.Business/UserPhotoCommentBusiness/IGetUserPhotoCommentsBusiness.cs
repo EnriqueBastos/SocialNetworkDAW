@@ -6,6 +6,6 @@ namespace SocialNetwork.Domain.Business
 {
     public interface IGetUserPhotoCommentsBusiness
     {
-        IList<CommentDto> GetComments(int idPhoto);
+        IList<CommentDto> GetCommentsByPhotoId(int idPhoto);
     }
 }

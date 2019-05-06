@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace SocialNetwork.Application.CommentQuerys
 {
-    public interface ICommentQuerys
+    public interface ICommentQuery
     {
         
         

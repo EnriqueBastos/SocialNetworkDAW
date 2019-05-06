@@ -4,6 +4,6 @@ namespace SocialNetwork.Domain.Business.PhotoBusiness
 {
     public interface IAddPhotoBusiness
     {
-        void AddPhoto(PhotoDto photo);
+        void AddPhoto(PhotoDetailsDto photo);
     }
 }

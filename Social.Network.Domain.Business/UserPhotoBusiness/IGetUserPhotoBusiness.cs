@@ -5,7 +5,7 @@ namespace SocialNetwork.Domain.Business
 {
     public interface IGetUserPhotoBusiness
     {
-        PhotoDto GetPhotoDtoByPhotoId(int PhotoId);
-        UserPhoto GetUserPhotoById(int PhotoId);
+        PhotoDetailsDto GetPhotoDetailsDtoByPhotoId(int PhotoId);
+        UserPhoto GetUserPhotoByPhotoId(int PhotoId);
     }
 }

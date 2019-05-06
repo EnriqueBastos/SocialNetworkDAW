@@ -7,8 +7,6 @@ namespace SocialNetwork.Application.MusicQuerys
 {
     public interface IMusicQuery
     {
-        IList<MusicDto> GetListMusic(int UserId);
-
-        void AddMusic(MusicDto music);
+        IList<MusicDto> GetListMusicByUserId(int UserId);
     }
 }

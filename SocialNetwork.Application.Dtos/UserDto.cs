@@ -9,7 +9,6 @@ namespace SocialNetwork.Domain.Dtos
 
         public string LastName { get; set; }
 
-
         public string Email { get; set; }
 
         public string Password { get; set; }
@@ -19,5 +18,7 @@ namespace SocialNetwork.Domain.Dtos
         public byte[] PhotoProfile { get; set; }
 
         public string BackgroundApp { get; set; }
+
+        public bool Private { get; set; }
     }
 }

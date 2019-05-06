@@ -6,6 +6,6 @@ namespace SocialNetwork.Domain.Business.MusicBusiness
 {
     public interface IGetMusicBusiness
     {
-         IList<MusicDto> GetListMusic(int UserId);
+         IList<MusicDto> GetListMusicByUserId(int UserId);
     }
 }

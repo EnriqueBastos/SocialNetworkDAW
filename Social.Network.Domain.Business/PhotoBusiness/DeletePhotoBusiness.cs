@@ -16,16 +16,16 @@ namespace SocialNetwork.Domain.Business.PhotoBusiness
             _photoRepository = photoRepository;
         }
 
-        public void DeletePhoto(PhotoDto photo)
+        public void DeletePhoto(PhotoDetailsDto photoDto)
         {
             _photoRepository.DeletePhoto(new Photo
             {
-                Id = photo.Id,
-                Title = photo.Title,
-                ImageBytes = photo.ImageBytes,
-                UpdateDateTime = photo.UploadDateTime,
-                Likes = photo.Likes,
-                Dislikes = photo.DisLikes
+                Id = photoDto.Id,
+                Title = photoDto.Title,
+                ImageBytes = photoDto.ImageBytes,
+                UpdateDateTime = photoDto.UploadDateTime,
+                Likes = photoDto.Likes,
+                Dislikes = photoDto.DisLikes
             });
         }
     }

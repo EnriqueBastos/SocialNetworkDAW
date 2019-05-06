@@ -10,7 +10,7 @@ using SocialNetwork.Data;
 namespace SocialNetwork.Infraestructure.Migrations
 {
     [DbContext(typeof(SocialNetworkContext))]
-    [Migration("20190429090009_CreateDatabase")]
+    [Migration("20190506154035_CreateDatabase")]
     partial class CreateDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,13 +23,13 @@ namespace SocialNetwork.Infraestructure.Migrations
 
             modelBuilder.Entity("SocialNetwork.Domain.Entities.Chat", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ChatName");
+                    b.Property<string>("ChatName");
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
                     b.ToTable("Chats");
                 });
@@ -99,7 +99,7 @@ namespace SocialNetwork.Infraestructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("UrlMusic");
+                    b.Property<string>("UrlVideo");
 
                     b.Property<int>("UserId");
 
@@ -151,6 +151,8 @@ namespace SocialNetwork.Infraestructure.Migrations
 
                     b.Property<byte[]>("PhotoProfile");
 
+                    b.Property<bool>("Private");
+
                     b.HasKey("Id");
 
                     b.ToTable("Users");
@@ -199,7 +201,7 @@ namespace SocialNetwork.Infraestructure.Migrations
             modelBuilder.Entity("SocialNetwork.Domain.Entities.Contact", b =>
                 {
                     b.HasOne("SocialNetwork.Domain.Entities.User", "User")
-                        .WithMany()
+                        .WithMany("Contacts")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

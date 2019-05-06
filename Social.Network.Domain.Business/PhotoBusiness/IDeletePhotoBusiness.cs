@@ -4,6 +4,6 @@ namespace SocialNetwork.Domain.Business.PhotoBusiness
 {
     public interface IDeletePhotoBusiness
     {
-        void DeletePhoto(PhotoDto photo);
+        void DeletePhoto(PhotoDetailsDto photo);
     }
 }

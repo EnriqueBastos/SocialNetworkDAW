@@ -4,41 +4,46 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using SocialNetwork.Application;
+using SocialNetwork.Application.Commands.MusicCommands;
+using SocialNetwork.Domain.Dtos;
 
 namespace SocialNetwork.Controllers
 {
+    
+
+    
     [Route("api/[controller]")]
     [ApiController]
-    public class DeletePhotoController : ControllerBase
+    public class AddMusicController : ControllerBase
     {
-        private readonly IUserPhotoQuery _photoQuerys;
+        private readonly IAddMusicCommandHandler _addMusicCommandHandler;
 
-        public DeletePhotoController(IUserPhotoQuery photoQuerys)
+        public AddMusicController(IAddMusicCommandHandler addMusicCommandHandler)
         {
-            _photoQuerys = photoQuerys;
+            _addMusicCommandHandler = addMusicCommandHandler;
         }
-        // GET: api/DeletePhoto
+        // GET: api/AddMusic
         [HttpGet]
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
         }
 
-        // GET: api/DeletePhoto/5
-        [HttpGet("{id}", Name = "DeletePhoto")]
-        public void Get(int id)
+        // GET: api/AddMusic/5
+        [HttpGet("{id}", Name = "Get")]
+        public string Get(int id)
         {
-            //_photoQuerys.DeletePhoto(id);
+            return "value";
         }
 
-        // POST: api/DeletePhoto
+        // POST: api/AddMusic
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task Post(MusicDto music)
         {
+            await _addMusicCommandHandler.Handler(music);
         }
 
-        // PUT: api/DeletePhoto/5
+        // PUT: api/AddMusic/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {

@@ -16,7 +16,7 @@ namespace SocialNetwork.Domain.Business.MusicBusiness
             _musicRepository = musicRepository;
         }
 
-        public IList<MusicDto> GetListMusic(int UserId)
+        public IList<MusicDto> GetListMusicByUserId(int UserId)
         {
             return _musicRepository
                 .GetMusic()
@@ -24,6 +24,7 @@ namespace SocialNetwork.Domain.Business.MusicBusiness
                 .Select(music =>
                     new MusicDto
                     {
+                        MusicId = music.Id,
                         UserId = music.User.Id,
                         UrlVideo = music.UrlVideo
                     }

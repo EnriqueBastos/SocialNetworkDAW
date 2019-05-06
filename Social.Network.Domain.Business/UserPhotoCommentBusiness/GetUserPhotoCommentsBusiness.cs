@@ -15,7 +15,7 @@ namespace SocialNetwork.Domain.Business
             _commentRepository = commentRepository;
         }
 
-        public IList<CommentDto> GetComments(int idPhoto)
+        public IList<CommentDto> GetCommentsByPhotoId(int idPhoto)
         {
             return _commentRepository
                 .GetUserPhotoComment()
