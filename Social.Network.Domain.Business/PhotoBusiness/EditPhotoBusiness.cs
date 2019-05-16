@@ -13,7 +13,7 @@ namespace SocialNetwork.Domain.Business.PhotoBusiness
             _photoRepository = photoRepository;
         }
 
-        public void EditPhoto(PhotoDetailsDto photoDto)
+        public void EditPhoto(GetPhotoDto photoDto)
         {
             _photoRepository.EditPhoto(new Photo
             {

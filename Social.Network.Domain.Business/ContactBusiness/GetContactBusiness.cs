@@ -3,6 +3,7 @@ using SocialNetwork.Domain.Dtos;
 using SocialNetwork.Domain.Entities;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace SocialNetwork.Domain.Business.ContactBusiness
 {
@@ -15,26 +16,25 @@ namespace SocialNetwork.Domain.Business.ContactBusiness
             _contactRepository = contactRepository;
         }
 
-        public IList<ProfileDto> GetAllProfileContactsByUserId(int userId)
+        public async Task<IList<ProfileDto>> GetAllProfileContactsByUserId(int userId)
         {
-            var contactList = _contactRepository
-                .GetContact()
-                .Select(contact => contact)
-                .Where(contact =>
-                contact.FriendId == userId 
-                ).ToList();
+            var contactList =  await _contactRepository.GetContactAsync();
+            
+            return contactList
+                    .Select(contact => contact)
+                    .Where(contact => contact.FriendId == userId)
+                    .Select(contact => new ProfileDto
+                    {
+                        UserId = contact.UserId,
+                        UserName = contact.User.Name,
+                        UserLastName = contact.User.LastName,
+                        PhotoProfile = contact.User.PhotoProfile,
+                        Private = contact.User.Private
 
-            return contactList.Select(contact => new ProfileDto
-            {
-                UserId = contact.UserId,
-                UserName = contact.User.Name,
-                UserLastName = contact.User.LastName,
-                PhotoProfile = contact.User.PhotoProfile,
-                Private = contact.User.Private
-
-            }).ToList();
- 
+                    })
+                    .ToList();
         }
+
         public IList<Contact> GetContactByUserIdFriendId(int userId, int friendId)
         {
             return _contactRepository

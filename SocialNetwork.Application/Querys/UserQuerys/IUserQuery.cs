@@ -7,7 +7,11 @@ namespace SocialNetwork.Application
     {
         IList<ProfileDto> GetProfileList();
 
-        UserDto GetUserByUserId(int userId);
+        ProfileDetailsDto GetProfileDetailsDtoByUserId(int userId);
+
+        UserDto GetUserDtoByUserId(int userId);
+
+        int GetUserIdByLoginDto(UserLoginDto loginDto);
 
 
 

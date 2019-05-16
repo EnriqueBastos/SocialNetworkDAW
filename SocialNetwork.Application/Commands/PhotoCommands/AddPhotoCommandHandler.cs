@@ -19,7 +19,7 @@ namespace SocialNetwork.Application.Commands.PhotoCommands
             _addPhotoBusiness = addPhotoBusiness;
         }
 
-        public async Task Handler(PhotoDetailsDto photo)
+        public async Task Handler(PhotoDto photo)
         {
             _addPhotoBusiness.AddPhoto(photo);
 

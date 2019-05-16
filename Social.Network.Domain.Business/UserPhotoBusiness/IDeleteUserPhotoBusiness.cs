@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SocialNetwork.Domain.Business.PhotoCommentBusiness
+namespace SocialNetwork.Domain.Business.UserPhotoBusiness
 {
     public interface IDeleteUserPhotoBusiness
     {

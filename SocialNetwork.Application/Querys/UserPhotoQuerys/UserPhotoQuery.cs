@@ -3,7 +3,7 @@ using SocialNetwork.Domain.Business;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using SocialNetwork.Domain.Business.PhotoCommentBusiness;
+using SocialNetwork.Domain.Business.UserPhotoBusiness;
 
 namespace SocialNetwork.Application
 {
@@ -13,26 +13,26 @@ namespace SocialNetwork.Application
 
         private readonly IGetUserPhotoBusiness _getPhoto;
 
-        private readonly IDeleteUserPhotoBusiness _deletePhoto;
+        
 
-        public PhotosQuery(IGetListUserPhotosBusiness getListPhotos, IGetUserPhotoBusiness getPhoto, IDeleteUserPhotoBusiness deletePhoto)
+        public PhotosQuery(IGetListUserPhotosBusiness getListPhotos, IGetUserPhotoBusiness getPhoto)
         {
             _getListPhotos = getListPhotos;
             _getPhoto = getPhoto;
-            _deletePhoto = deletePhoto;
+            
         }
 
-        public IList<PhotoDetailsDto> GetLastPhotos()
+        public IList<GetPhotoDto> GetLastPhotos()
         {
             return _getListPhotos.GetLastPhotos();
         }
 
-        public PhotoDetailsDto GetPhotoByPhotoId(int PhotoId)
+        public GetPhotoDto GetPhotoByPhotoId(int PhotoId)
         {
             return _getPhoto.GetPhotoDetailsDtoByPhotoId(PhotoId);
         }
 
-        public IList<PhotoDetailsDto> GetListPhotosByUserId(int userId)
+        public IList<GetPhotoDto> GetListPhotosByUserId(int userId)
         {
             return _getListPhotos.GetListPhotosByUserId(userId);
         }

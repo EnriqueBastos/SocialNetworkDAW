@@ -19,7 +19,7 @@ namespace SocialNetwork.Application
 
         }
 
-        public UserDto GetUserByUserId(int userId)
+        public UserDto GetUserDtoByUserId(int userId)
         {
             return _getUserBusiness.GetUserDtoByUserId(userId);
         }
@@ -31,6 +31,15 @@ namespace SocialNetwork.Application
 
         }
 
+        public int GetUserIdByLoginDto(UserLoginDto loginDto)
+        {
+            return _getUserBusiness.GetUserIdByLoginDto(loginDto);
+        }
+
+        public ProfileDetailsDto GetProfileDetailsDtoByUserId(int userId)
+        {
+            return _getUserBusiness.GetProfileDetailsDtoByUserId(userId);
+        }
         
 
         

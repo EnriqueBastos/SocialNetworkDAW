@@ -1,5 +1,4 @@
 ﻿using SocialNetwork.Domain.Dtos;
-using SocialNetwork.Domain.Entities;
 using System.Collections.Generic;
 
 namespace SocialNetwork.Domain.Business.UserBusiness
@@ -8,5 +7,8 @@ namespace SocialNetwork.Domain.Business.UserBusiness
     {
         UserDto GetUserDtoByUserId(int UserId);
         IList<ProfileDto> GetListUsers();
+        ProfileDetailsDto GetProfileDetailsDtoByUserId(int userId);
+
+        int GetUserIdByLoginDto(UserLoginDto loginDto);
     }
 }

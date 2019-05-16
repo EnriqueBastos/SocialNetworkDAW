@@ -5,7 +5,7 @@ using System.Text;
 using System.Linq;
 using SocialNetwork.Domain.Dtos;
 
-namespace SocialNetwork.Domain.Business.PhotoCommentBusiness
+namespace SocialNetwork.Domain.Business.UserPhotoBusiness
 {
     public class DeletePhotoBusiness : IDeleteUserPhotoBusiness
     {

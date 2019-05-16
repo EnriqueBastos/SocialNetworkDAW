@@ -3,7 +3,7 @@
 
 namespace SocialNetwork.Domain.Dtos
 {
-    public class PhotoDetailsDto
+    public class GetPhotoDto
     {
         public int Id { get; set; }
 

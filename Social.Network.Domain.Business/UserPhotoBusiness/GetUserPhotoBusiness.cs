@@ -2,7 +2,7 @@
 using SocialNetwork.Domain.Dtos;
 using SocialNetwork.Domain.Entities;
 using System.Linq;
-namespace SocialNetwork.Domain.Business.PhotoCommentBusiness
+namespace SocialNetwork.Domain.Business.UserPhotoBusiness
 {
     public class GetUserPhotoBusiness : IGetUserPhotoBusiness
     {
@@ -13,11 +13,11 @@ namespace SocialNetwork.Domain.Business.PhotoCommentBusiness
             _userPhotoRepository = userPhotoRepository;
         }
 
-        public PhotoDetailsDto GetPhotoDetailsDtoByPhotoId(int PhotoId)
+        public GetPhotoDto GetPhotoDetailsDtoByPhotoId(int PhotoId)
         {
              return _userPhotoRepository
                 .GetUserPhoto()
-                .Select(photo => new PhotoDetailsDto
+                .Select(photo => new GetPhotoDto
                 {
                     UserName = photo.User.Name,
                     ImageBytes = photo.Photo.ImageBytes,

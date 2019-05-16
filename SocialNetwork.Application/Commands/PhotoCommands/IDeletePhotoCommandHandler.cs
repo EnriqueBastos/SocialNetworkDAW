@@ -5,6 +5,6 @@ namespace SocialNetwork.Application.Commands.PhotoCommands
 {
     public interface IDeletePhotoCommandHandler
     {
-        Task Handler(PhotoDetailsDto photo);
+        Task Handler(GetPhotoDto photo);
     }
 }

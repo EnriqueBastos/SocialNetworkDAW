@@ -1,11 +1,11 @@
 ﻿using SocialNetwork.Domain.Dtos;
 using SocialNetwork.Domain.Entities;
 
-namespace SocialNetwork.Domain.Business
+namespace SocialNetwork.Domain.Business.UserPhotoBusiness
 {
     public interface IGetUserPhotoBusiness
     {
-        PhotoDetailsDto GetPhotoDetailsDtoByPhotoId(int PhotoId);
+        GetPhotoDto GetPhotoDetailsDtoByPhotoId(int PhotoId);
         UserPhoto GetUserPhotoByPhotoId(int PhotoId);
     }
 }

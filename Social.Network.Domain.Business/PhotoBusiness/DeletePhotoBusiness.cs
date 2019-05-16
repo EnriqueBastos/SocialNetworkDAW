@@ -16,7 +16,7 @@ namespace SocialNetwork.Domain.Business.PhotoBusiness
             _photoRepository = photoRepository;
         }
 
-        public void DeletePhoto(PhotoDetailsDto photoDto)
+        public void DeletePhoto(GetPhotoDto photoDto)
         {
             _photoRepository.DeletePhoto(new Photo
             {

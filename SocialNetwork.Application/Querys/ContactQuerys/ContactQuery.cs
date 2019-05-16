@@ -3,6 +3,7 @@ using SocialNetwork.Domain.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace SocialNetwork.Application.Querys.ContactQuerys
 {
@@ -15,9 +16,9 @@ namespace SocialNetwork.Application.Querys.ContactQuerys
             _getContactBusiness = getContactBusiness;
         }
 
-        public IList<ProfileDto> GetListContactProfileByUserId(int userId)
+        public async Task<IList<ProfileDto>> GetListContactProfileByUserId(int userId)
         {
-            return _getContactBusiness.GetAllProfileContactsByUserId(userId);
+            return  await _getContactBusiness.GetAllProfileContactsByUserId(userId);
         } 
     }
 }

@@ -40,6 +40,21 @@ namespace SocialNetwork.Domain.Business.UserBusiness
                 );
         }
 
+        public ProfileDetailsDto GetProfileDetailsDtoByUserId(int userId)
+        {
+            return _userRepository
+                .GetUser()
+                .Select(user => new ProfileDetailsDto
+                {
+                    UserId = user.Id,
+                    UserName = user.Name,
+                    UserLastName = user.LastName,
+                    DateBirthday = user.DateBirthday,
+                    PhotoProfile = user.PhotoProfile
+
+                }).FirstOrDefault(profile => profile.UserId == userId);
+        }
+
         public IList<ProfileDto> GetListUsers()
         {
             return _userRepository
@@ -55,5 +70,28 @@ namespace SocialNetwork.Domain.Business.UserBusiness
                 }).ToList();
 
         }
+
+        public int GetUserIdByLoginDto(UserLoginDto loginDto)
+        {
+            var userLogin =_userRepository
+                            .GetUser()
+                            .FirstOrDefault(user =>
+
+                            user.Email == loginDto.Email && user.Password == loginDto.Password
+
+                            );
+            if(userLogin != null)
+            {
+                return userLogin.Id;
+            }
+            else
+            {
+                return -1;
+            }
+            
+                
+        }
+
+        
     }
 }

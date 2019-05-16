@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 using SocialNetwork.Domain.Dtos;
-namespace SocialNetwork.Domain.Business
+namespace SocialNetwork.Domain.Business.UserPhotoBusiness
 {
     public interface IGetListUserPhotosBusiness
     {
-        IList<PhotoDetailsDto> GetLastPhotos();
+        IList<GetPhotoDto> GetLastPhotos();
 
-        IList<PhotoDetailsDto> GetListPhotosByUserId(int userId);
+        IList<GetPhotoDto> GetListPhotosByUserId(int userId);
     }
 }

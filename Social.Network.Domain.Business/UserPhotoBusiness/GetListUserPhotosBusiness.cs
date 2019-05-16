@@ -5,7 +5,7 @@ using System.Text;
 using SocialNetwork.Domain.Dtos;
 using SocialNetwork.Domain.Contracts;
 
-namespace SocialNetwork.Domain.Business
+namespace SocialNetwork.Domain.Business.UserPhotoBusiness
 {
     public class GetListUserPhotosBusiness : IGetListUserPhotosBusiness
     {
@@ -15,29 +15,32 @@ namespace SocialNetwork.Domain.Business
         {
             _photoRepository = photoRepository;
         }
-        public IList<PhotoDetailsDto> GetLastPhotos()
+        public IList<GetPhotoDto> GetLastPhotos()
         {
             return _photoRepository
                 .GetUserPhoto()
                 .OrderByDescending(photo => photo)
                 .Select(photo =>
-                new PhotoDetailsDto {
+                new GetPhotoDto {
+                    Id = photo.Id,
                     UserName = photo.User.Name,
                     ImageBytes = photo.Photo.ImageBytes,
                     Title = photo.Photo.Title,
-                    UploadDateTime = photo.Photo.UpdateDateTime
+                    UploadDateTime = photo.Photo.UpdateDateTime,
+                    Likes = photo.Photo.Likes,
+                    DisLikes = photo.Photo.Dislikes
 
                 }).ToList();
 
         }
 
-        public IList<PhotoDetailsDto> GetListPhotosByUserId(int userId)
+        public IList<GetPhotoDto> GetListPhotosByUserId(int userId)
         {
             return _photoRepository
                 .GetUserPhoto()
                 .OrderByDescending(photo => photo)
                 .Select(photo =>
-                new PhotoDetailsDto {
+                new GetPhotoDto {
                     UserName = photo.User.Name,
                     ImageBytes = photo.Photo.ImageBytes,
                     Title = photo.Photo.Title,

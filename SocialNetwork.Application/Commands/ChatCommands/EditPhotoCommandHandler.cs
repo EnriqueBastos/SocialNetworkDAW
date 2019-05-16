@@ -21,7 +21,7 @@ namespace SocialNetwork.Application.Commands.ChatCommands
             _editPhotoBusiness = editPhotoBusiness;
         }
 
-        public async Task Handler(PhotoDetailsDto photoDto)
+        public async Task Handler(GetPhotoDto photoDto)
         {
             _editPhotoBusiness.EditPhoto(photoDto);
 
