@@ -6,12 +6,13 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SocialNetwork.Application;
 using SocialNetwork.Application.Commands;
+using SocialNetwork.Application.Commands.UserCommands;
 using SocialNetwork.Domain.Dtos;
 
 namespace SocialNetwork.Controllers
 {
    
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -19,42 +20,49 @@ namespace SocialNetwork.Controllers
 
         private readonly IUserQuery _userQuery;
 
-        public UserController(IAddUserCommandHandler addUserCommandHandler, IUserQuery userQuery )
+        IEditUserCommandHandler _editUserCommandHandler;
+
+        public UserController(IAddUserCommandHandler addUserCommandHandler, IUserQuery userQuery , IEditUserCommandHandler editUserCommandHandler )
         {
             _addUserCommandHandler = addUserCommandHandler;
             _userQuery = userQuery;
-        }
-        // GET: api/User
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
+            _editUserCommandHandler = editUserCommandHandler;
         }
 
-        // GET: api/User/5
-        [HttpGet("{id}", Name = "GetUsers")]
-        public int GetUserId(UserLoginDto loginDto)
+
+        // GET: api/User/GetProfile/1
+
+        [HttpGet("{userId}", Name = "GetProfile")]
+        [ActionName("GetProfile")]
+        public async Task<ProfileDetailsDto> GetProfileDto(int userId)
         {
-            return  _userQuery.GetUserIdByLoginDto(loginDto);
+            return await _userQuery.GetProfileDetailsDtoByUserId(userId);
+        }
+
+        [HttpPost]
+        [ActionName("GetUserId")]
+        public async Task<int> GetUserId(UserLoginDto loginDto)
+        {
+            return await  _userQuery.GetUserIdByLoginDto(loginDto);
         }
 
         // POST: api/User
         [HttpPost]
-        public async Task Post(UserDto userDto)
+        [ActionName("AddUser")]
+        public async Task AddUser(UserDto userDto)
         {
             await _addUserCommandHandler.Handler(userDto);
         }
 
-        // PUT: api/User/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPost]
+        [ActionName("EditUser")]
+
+        public async Task EditUser(SetUserDto profileDetailsDto)
         {
+            await _editUserCommandHandler.Handler(profileDetailsDto);
         }
 
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+
+ 
     }
 }

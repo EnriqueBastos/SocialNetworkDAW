@@ -4,40 +4,42 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using SocialNetwork.Domain.Business.UserPhotoBusiness;
+using System.Threading.Tasks;
 
 namespace SocialNetwork.Application
 {
-    public class PhotosQuery : IUserPhotoQuery
+    public class UserPhotosQuery : IUserPhotoQuery
     {
         private readonly IGetListUserPhotosBusiness _getListPhotos;
 
-        private readonly IGetUserPhotoBusiness _getPhoto;
+        private readonly IGetUserPhotoBusiness _getUserPhoto;
 
         
 
-        public PhotosQuery(IGetListUserPhotosBusiness getListPhotos, IGetUserPhotoBusiness getPhoto)
+        public UserPhotosQuery(IGetListUserPhotosBusiness getListPhotos, IGetUserPhotoBusiness getUserPhoto)
         {
             _getListPhotos = getListPhotos;
-            _getPhoto = getPhoto;
+            _getUserPhoto = getUserPhoto;
             
         }
-
-        public IList<GetPhotoDto> GetLastPhotos()
+         public async Task<GetPhotoDto> GetPhotoByPhotoId(int PhotoId)
         {
-            return _getListPhotos.GetLastPhotos();
+            return await _getUserPhoto.GetPhotoDetailsDtoByPhotoId(PhotoId);
         }
 
-        public GetPhotoDto GetPhotoByPhotoId(int PhotoId)
+        public IList<GetPhotoDto> GetLastPhotosContacts(int userId)
         {
-            return _getPhoto.GetPhotoDetailsDtoByPhotoId(PhotoId);
+            return  _getListPhotos.GetLastPhotosContacts(userId);
         }
 
-        public IList<GetPhotoDto> GetListPhotosByUserId(int userId)
+        public async Task<IList<GetPhotoDto>> GetLastPhotosUserByUserId(int userId)
         {
-            return _getListPhotos.GetListPhotosByUserId(userId);
+            return await _getListPhotos.GetListPhotosByUserId(userId);
         }
-        
 
-
+        public async Task<GetUserPhotoInfoDto> GetUserPhotoInfoDtoByUserPhotoId(int userPhotoId)
+        {
+            return await _getUserPhoto.GetUserPhotoInfoDtoByPhotoId(userPhotoId);
+        }
     }
 }

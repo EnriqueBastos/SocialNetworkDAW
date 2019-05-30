@@ -3,12 +3,18 @@ using Microsoft.Extensions.DependencyInjection;
 using SocialNetwork.Application;
 using SocialNetwork.Application.Commands;
 using SocialNetwork.Application.Commands.ContactCommands;
+using SocialNetwork.Application.Commands.ContactNotificationCommands;
 using SocialNetwork.Application.Commands.MusicCommands;
 using SocialNetwork.Application.Commands.PhotoCommands;
+using SocialNetwork.Application.Commands.UserCommands;
+using SocialNetwork.Application.Commands.UserPhotoCommands;
+using SocialNetwork.Application.Commands.UserPhotoCommentCommands;
 using SocialNetwork.Application.MusicQuerys;
 using SocialNetwork.Application.Querys.ContactQuerys;
 using SocialNetwork.Domain.Business;
+using SocialNetwork.Domain.Business.CommentBusiness;
 using SocialNetwork.Domain.Business.ContactBusiness;
+using SocialNetwork.Domain.Business.ContactNotificationBusiness;
 using SocialNetwork.Domain.Business.MusicBusiness;
 using SocialNetwork.Domain.Business.PhotoBusiness;
 
@@ -28,14 +34,16 @@ namespace SocialNetwork
             services.AddTransient<IAddPhotoCommandHandler, AddPhotoCommandHandler>();
             services.AddTransient<IAddPhotoBusiness, AddPhotoBusiness> ();
             services.AddTransient<IPhotoRepository, PhotoRepository>();
-
+            services.AddTransient<IGetPhotoBusiness, GetPhotoBusiness>();
 
 
             //UserPhoto dependencies
-            services.AddTransient<IUserPhotoQuery, PhotosQuery>();
+            services.AddTransient<IUserPhotoQuery, UserPhotosQuery>();
             services.AddTransient<IGetListUserPhotosBusiness, GetListUserPhotosBusiness>();
             services.AddTransient<IUserPhotoRepository, UserPhotoRepository>();
             services.AddTransient<IGetUserPhotoBusiness,GetUserPhotoBusiness>();
+            services.AddTransient<IAddUserPhotoBusiness, AddUserPhotoBusiness>();
+            services.AddTransient<IAddUserPhotoCommandHandler, AddUserPhotoCommandHandler>();
             
             //Music dependencies
             services.AddTransient<IMusicQuery, MusicQuery>();
@@ -51,6 +59,8 @@ namespace SocialNetwork
             services.AddTransient<IAddUserBusiness, AddUserBusiness>();
             services.AddTransient<IGetUserBusiness, GetUserBusiness>();
             services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IEditUserCommandHandler, EditUserCommandHandler>();
+            services.AddTransient<IEditUserBusiness, EditUserBusiness>();
 
             //Contact dependencies
             services.AddTransient<IContactQuery, ContactQuery>();
@@ -60,6 +70,20 @@ namespace SocialNetwork
             services.AddTransient<IAddContactBusiness, AddContactBusiness>();
             services.AddTransient<IGetContactBusiness, GetContactBusiness>();
             services.AddTransient<IContactRepository, ContactRepository>();
+
+            //UserPhotoComment dependencies
+            services.AddTransient<IUserPhotoCommentRepository, UserPhotoCommentRepository>();
+            services.AddTransient<IGetUserPhotoCommentsBusiness, GetUserPhotoCommentsBusiness>();
+            services.AddTransient<IAddUserPhotoCommentBusiness, AddUserPhotoCommentBusiness>();
+            services.AddTransient<IAddUserPhotoCommentCommandHandler, AddUserPhotoCommentCommandHandler>();
+
+            //ContactNotifications dependencies
+            services.AddTransient<IContactNotificationRepository, ContactNotificationRepository>();
+            services.AddTransient<IGetContactNotificationBusiness, GetContactNotificationBusiness>();
+            services.AddTransient<IAddContactNotificationBusiness, AddContactNotificationBusiness>();
+            services.AddTransient<IDeleteContactNotificationBusiness, DeleteContactNotificationBusiness>();
+            services.AddTransient<IDeleteContactNotificationCommandHandler, DeleteContactNotificationCommandHandler>();
+            services.AddTransient<IAddContactNotificationCommandHandler, AddContactNotificationCommandHandler>();
             
         }
     }

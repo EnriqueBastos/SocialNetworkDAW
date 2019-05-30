@@ -9,5 +9,7 @@ namespace SocialNetwork.Domain.Dtos
         public int UserId { get; set; }
 
         public int FriendId { get; set; }
+
+        public int ContactNotificationId { get; set; }
     }
 }

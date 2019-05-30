@@ -12,8 +12,18 @@ namespace SocialNetwork.Domain.Dtos
 
         public string UserLastName { get; set; }
 
+        public string Email { get; set; }
+
+        public bool Private { get; set; } 
+
+        public string Description { get; set; }
+
         public DateTime DateBirthday { get; set; }
 
+        public string BackgroundApp { get; set; }
+
         public byte[] PhotoProfile { get; set; }
+
+        public IList<FriendRequestDto> FriendRequests { get; set; }
     }
 }

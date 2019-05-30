@@ -5,6 +5,6 @@ namespace SocialNetwork.Application.Commands.UserCommands
 {
     public interface IEditUserCommandHandler
     {
-        Task Handler(UserDto userDto);
+        Task Handler(SetUserDto userDto);
     }
 }

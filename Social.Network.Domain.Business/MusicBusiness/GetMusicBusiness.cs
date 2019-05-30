@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace SocialNetwork.Domain.Business.MusicBusiness
 {
@@ -16,9 +18,9 @@ namespace SocialNetwork.Domain.Business.MusicBusiness
             _musicRepository = musicRepository;
         }
 
-        public IList<MusicDto> GetListMusicByUserId(int UserId)
+        public async Task<IList<MusicDto>> GetListMusicByUserId(int UserId)
         {
-            return _musicRepository
+            return await _musicRepository
                 .GetMusic()
                 .OrderByDescending(music => music)
                 .Select(music =>
@@ -29,7 +31,7 @@ namespace SocialNetwork.Domain.Business.MusicBusiness
                         UrlVideo = music.UrlVideo
                     }
                 ).Where(music => music.UserId == UserId)
-                .ToList();
+                .ToListAsync();
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using SocialNetwork.Domain.Contracts;
 using SocialNetwork.Domain.Dtos;
 using SocialNetwork.Domain.Entities;
+using System.Threading.Tasks;
 
 namespace SocialNetwork.Domain.Business.CommentBusiness
 {
@@ -13,14 +14,16 @@ namespace SocialNetwork.Domain.Business.CommentBusiness
             _commentRepository = commentRepository;
         }
 
-        public void AddUserPhotoComment(CommentDto comment)
+        public async Task AddUserPhotoComment(CommentDto comment)
         {
             _commentRepository.AddUserPhotoComment(new UserPhotoComment
             {
                 UserId = comment.UserId,
-                UserPhotoId = comment.PhotoId,
+                UserPhotoId = comment.UserPhotoId,
                 CommentText = comment.CommentText
             });
+
+            await _commentRepository.UnitOfWork.Save();
         }
     }
 }

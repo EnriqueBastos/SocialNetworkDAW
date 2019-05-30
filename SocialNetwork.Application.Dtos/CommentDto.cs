@@ -10,6 +10,6 @@ namespace SocialNetwork.Domain.Dtos
         public string UserName { get; set; }
         public string CommentText { get; set; }
 
-        public int PhotoId { get; set; }
+        public int UserPhotoId { get; set; }
     }
 }

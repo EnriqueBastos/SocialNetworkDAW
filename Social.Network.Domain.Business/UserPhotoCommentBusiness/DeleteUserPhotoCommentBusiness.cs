@@ -19,7 +19,7 @@ namespace SocialNetwork.Domain.Business.CommentBusiness
             {
                 Id = comment.Id,
                 UserId = comment.UserId,
-                UserPhotoId = comment.PhotoId,
+                UserPhotoId = comment.UserPhotoId,
                 CommentText = comment.CommentText
             });
         }

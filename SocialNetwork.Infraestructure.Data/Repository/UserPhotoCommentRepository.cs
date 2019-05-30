@@ -1,11 +1,8 @@
 ﻿using SocialNetwork.Data;
 using SocialNetwork.Domain.Contracts;
 using SocialNetwork.Domain.Entities;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace SocialNetwork.Infraestructure.Repository
 {
@@ -23,6 +20,7 @@ namespace SocialNetwork.Infraestructure.Repository
         public IQueryable<UserPhotoComment> GetUserPhotoComment()
         {
             return _socialNetworkContext.Set<UserPhotoComment>();
+            
         }
 
         public void AddUserPhotoComment(UserPhotoComment comment)

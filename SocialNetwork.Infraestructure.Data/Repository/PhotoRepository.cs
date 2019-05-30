@@ -2,7 +2,7 @@
 using SocialNetwork.Data;
 using SocialNetwork.Domain.Contracts;
 using SocialNetwork.Domain.Entities;
-
+using System.Linq;
 
 namespace SocialNetwork.Infraestructure.Repository
 {
@@ -18,6 +18,11 @@ namespace SocialNetwork.Infraestructure.Repository
         public void AddPhoto(Photo photo)
         {
             _socialNetworkContext.Set<Photo>().Add(photo);
+        }
+
+        public IQueryable<Photo> GetPhoto()
+        {
+            return _socialNetworkContext.Set<Photo>();
         }
 
         public void DeletePhoto(Photo photo)

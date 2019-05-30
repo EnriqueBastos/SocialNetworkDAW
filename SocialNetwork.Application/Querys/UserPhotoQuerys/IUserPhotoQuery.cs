@@ -2,17 +2,24 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace SocialNetwork.Application
 {
     public interface IUserPhotoQuery
     {
-        IList<GetPhotoDto> GetLastPhotos();
+        IList<GetPhotoDto> GetLastPhotosContacts(int userId);
 
-        GetPhotoDto GetPhotoByPhotoId(int PhotoId);
 
-        IList<GetPhotoDto> GetListPhotosByUserId(int userId);
+        Task<GetPhotoDto> GetPhotoByPhotoId(int PhotoId);
 
-        
+        Task<IList<GetPhotoDto>> GetLastPhotosUserByUserId(int userId);
+
+        Task<GetUserPhotoInfoDto> GetUserPhotoInfoDtoByUserPhotoId(int userPhotoId);
+
+
+
+
+
     }
 }

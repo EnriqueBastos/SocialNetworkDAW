@@ -19,12 +19,14 @@ namespace SocialNetwork.Domain.Business.ContactBusiness
 
         public void DeleteContact(ContactDto contactDto)
         {
+
             var contact = _getContactBusiness.GetContactByUserIdFriendId(contactDto.UserId, contactDto.FriendId);
 
             contact.ToList().ForEach(friendship =>
 
                 _contactRepository.DeleteContact(friendship)
             );
+
         }
     }
 }

@@ -16,5 +16,9 @@ namespace SocialNetwork.Domain.Dtos
 
         public bool Private { get; set; }
 
+        public bool IsFriend { get; set; }
+
+        public bool FriendRequestIsSent { get; set; }
+
     }
 }

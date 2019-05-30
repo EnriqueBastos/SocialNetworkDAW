@@ -31,6 +31,8 @@ namespace SocialNetwork.Data
 
         public DbSet<MessageChat> MessageChats { get; set; }
 
+        public DbSet<ContactNotification> ContactNotifications { get; set; }
+
         public async Task Save()
         {
             await SaveChangesAsync();

@@ -1,7 +1,7 @@
 ﻿using SocialNetwork.Domain.Contracts;
 using SocialNetwork.Domain.Dtos;
 using SocialNetwork.Domain.Entities;
-using System.Threading.Tasks;
+using System;
 
 namespace SocialNetwork.Domain.Business.UserBusiness
 {
@@ -14,18 +14,22 @@ namespace SocialNetwork.Domain.Business.UserBusiness
             _userRepository = userRepository;
         }
 
-        public void EditUser(UserDto userDto)
+        public void EditUser(SetUserDto profileDetailsDto)
         {
-            _userRepository.EditUser(new User {
-                Id = userDto.Id,
-                Name = userDto.Name,
-                LastName = userDto.LastName,
-                Email = userDto.Email,
-                Password = userDto.Password,
-                DateBirthday = userDto.DateBirthday,
-                PhotoProfile = userDto.PhotoProfile,
-                BackgroundApp = userDto.BackgroundApp,
-                Private = userDto.Private
+            byte[] bytesPhotoProfile = Convert.FromBase64String(profileDetailsDto.PhotoProfile);
+
+            _userRepository.EditUser(new User
+            {
+                Id = profileDetailsDto.Id,
+                Name = profileDetailsDto.Name,
+                LastName = profileDetailsDto.LastName,
+                Email = profileDetailsDto.Email,
+                Password = "123",
+                Description = profileDetailsDto.Description,
+                DateBirthday = profileDetailsDto.DateBirthday,
+                PhotoProfile = bytesPhotoProfile,
+                BackgroundApp = profileDetailsDto.BackgroundApp,
+                Private = profileDetailsDto.Private
             });
         }
     }

@@ -20,7 +20,7 @@ namespace SocialNetwork.Domain.Business.PhotoBusiness
         {
             _photoRepository.DeletePhoto(new Photo
             {
-                Id = photoDto.Id,
+                Id = photoDto.UserPhotoId,
                 Title = photoDto.Title,
                 ImageBytes = photoDto.ImageBytes,
                 UpdateDateTime = photoDto.UploadDateTime,

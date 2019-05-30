@@ -5,6 +5,6 @@ namespace SocialNetwork.Domain.Business.UserBusiness
 {
     public interface IEditUserBusiness
     {
-        void EditUser(UserDto user);
+        void EditUser(SetUserDto user);
     }
 }

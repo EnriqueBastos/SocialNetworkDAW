@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using SocialNetwork.Domain.Dtos;
+
 namespace SocialNetwork.Domain.Business.UserPhotoBusiness
 {
     public interface IGetListUserPhotosBusiness
     {
-        IList<GetPhotoDto> GetLastPhotos();
+        IList<GetPhotoDto> GetLastPhotosContacts(int userId);
 
-        IList<GetPhotoDto> GetListPhotosByUserId(int userId);
+        Task<IList<GetPhotoDto>> GetListPhotosByUserId(int userId);
     }
 }

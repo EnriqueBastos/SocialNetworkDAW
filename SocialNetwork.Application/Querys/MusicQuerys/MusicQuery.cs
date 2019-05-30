@@ -3,6 +3,7 @@ using SocialNetwork.Domain.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace SocialNetwork.Application.MusicQuerys
 {
@@ -18,9 +19,9 @@ namespace SocialNetwork.Application.MusicQuerys
             
         }
 
-        public IList<MusicDto> GetListMusicByUserId(int UserId)
+        public async Task<IList<MusicDto>> GetListMusicByUserId(int UserId)
         {
-            return _getMusic.GetListMusicByUserId(UserId);
+            return  await _getMusic.GetListMusicByUserId(UserId);
         }
 
        

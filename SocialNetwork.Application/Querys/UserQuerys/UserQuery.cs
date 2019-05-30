@@ -1,6 +1,7 @@
 ﻿using SocialNetwork.Domain.Dtos;
 using System.Collections.Generic;
 using SocialNetwork.Domain.Business.UserBusiness;
+using System.Threading.Tasks;
 
 namespace SocialNetwork.Application
 {
@@ -19,28 +20,33 @@ namespace SocialNetwork.Application
 
         }
 
-        public UserDto GetUserDtoByUserId(int userId)
+        public async Task<UserDto> GetUserDtoByUserId(int userId)
         {
-            return _getUserBusiness.GetUserDtoByUserId(userId);
+            return await _getUserBusiness.GetUserDtoByUserId(userId);
         }
 
-        public IList<ProfileDto> GetProfileList()
+        public async Task<IList<ProfileDto>> GetProfileList()
         {
 
-            return _getUserBusiness.GetListUsers();
+            return await _getUserBusiness.GetListUsers();
 
         }
 
-        public int GetUserIdByLoginDto(UserLoginDto loginDto)
+        public async Task<int> GetUserIdByLoginDto(UserLoginDto loginDto)
         {
-            return _getUserBusiness.GetUserIdByLoginDto(loginDto);
+            return await _getUserBusiness.GetUserIdByLoginDto(loginDto);
         }
 
-        public ProfileDetailsDto GetProfileDetailsDtoByUserId(int userId)
+        public async Task<ProfileDetailsDto> GetProfileDetailsDtoByUserId(int userId)
         {
-            return _getUserBusiness.GetProfileDetailsDtoByUserId(userId);
+            return await _getUserBusiness.GetProfileDetailsDtoByUserId(userId);
         }
         
+        public async Task<IList<ProfileDto>> GetProfileDtosBySearchContactDto(SearchContactDto searchContactDto)
+        {
+            return await _getUserBusiness
+                .GetProfileDtosBySearchContactDto(searchContactDto);
+        }
 
         
     }

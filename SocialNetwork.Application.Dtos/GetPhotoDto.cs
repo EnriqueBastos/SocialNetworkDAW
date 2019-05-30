@@ -5,7 +5,7 @@ namespace SocialNetwork.Domain.Dtos
 {
     public class GetPhotoDto
     {
-        public int Id { get; set; }
+        public int UserPhotoId { get; set; }
 
         public string UserName { get; set; }
 

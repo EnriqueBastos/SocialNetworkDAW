@@ -1,9 +1,10 @@
 ﻿using SocialNetwork.Domain.Dtos;
+using System.Threading.Tasks;
 
 namespace SocialNetwork.Domain.Business.PhotoBusiness
 {
     public interface IAddPhotoBusiness
     {
-        void AddPhoto(PhotoDto photo);
+        Task AddPhoto(AddPhotoDto photoDto);
     }
 }

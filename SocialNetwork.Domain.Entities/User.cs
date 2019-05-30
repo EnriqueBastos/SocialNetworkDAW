@@ -22,6 +22,8 @@ namespace SocialNetwork.Domain.Entities
 
         public bool Private { get; set; }
 
+        public string Description { get; set; }
+
         public ICollection<Contact> Contacts { get; set; }
 
         public ICollection<UserPhotoComment> UserPhotoComments { get; set; }
@@ -29,5 +31,6 @@ namespace SocialNetwork.Domain.Entities
         public ICollection<Music> Musics { get; set; }
 
         public ICollection<GroupChat> GroupChats { get; set; }
+
     }
 }

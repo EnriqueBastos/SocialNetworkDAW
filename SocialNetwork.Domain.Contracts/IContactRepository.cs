@@ -9,9 +9,7 @@ namespace SocialNetwork.Domain.Contracts
     {
         IQueryable<Contact> GetContact();
 
-        Task<IList<Contact>> GetContactAsync();
-
-        void AddContact(Contact contact);
+        Task AddContact(Contact contact);
 
         void DeleteContact(Contact contact);
     }

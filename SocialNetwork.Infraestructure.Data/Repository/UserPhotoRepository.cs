@@ -28,7 +28,7 @@ namespace SocialNetwork.Infraestructure.Repository
 
         public void AddUserPhoto(UserPhoto photo)
         {
-            //_socialNetworkContext.Set<UserPhoto>.Add(photo);
+            _socialNetworkContext.Set<UserPhoto>().Add(photo);
         }
 
         public IUnitOfWork UnitOfWork

@@ -10,5 +10,7 @@ namespace SocialNetwork.Domain.Business.ContactBusiness
         Task<IList<ProfileDto>> GetAllProfileContactsByUserId(int userId);
 
         IList<Contact> GetContactByUserIdFriendId(int userId, int friendId);
+
+        IList<int> GetListFriendIdByUserId(int userId);
     }
 }

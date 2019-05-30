@@ -49,6 +49,23 @@ namespace SocialNetwork.Infraestructure.Migrations
                     b.ToTable("Contacts");
                 });
 
+            modelBuilder.Entity("SocialNetwork.Domain.Entities.ContactNotification", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("FriendId");
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ContactNotifications");
+                });
+
             modelBuilder.Entity("SocialNetwork.Domain.Entities.GroupChat", b =>
                 {
                     b.Property<int>("Id")
@@ -139,6 +156,8 @@ namespace SocialNetwork.Infraestructure.Migrations
 
                     b.Property<DateTime>("DateBirthday");
 
+                    b.Property<string>("Description");
+
                     b.Property<string>("Email");
 
                     b.Property<string>("LastName");
@@ -200,6 +219,14 @@ namespace SocialNetwork.Infraestructure.Migrations
                 {
                     b.HasOne("SocialNetwork.Domain.Entities.User", "User")
                         .WithMany("Contacts")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("SocialNetwork.Domain.Entities.ContactNotification", b =>
+                {
+                    b.HasOne("SocialNetwork.Domain.Entities.User", "User")
+                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

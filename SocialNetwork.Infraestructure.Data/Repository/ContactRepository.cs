@@ -21,16 +21,10 @@ namespace SocialNetwork.Infraestructure.Repository
         {
             return _socialNetworkContext.Set<Contact>();
         }
-        public async Task<IList<Contact>> GetContactAsync()
 
+        public async Task AddContact(Contact contact)
         {
-            return await _socialNetworkContext.Set<Contact>().Include(x => x.User).ToListAsync();
-
-        }
-
-        public void AddContact(Contact contact)
-        {
-            _socialNetworkContext.Set<Contact>().Add(contact);
+            await _socialNetworkContext.Set<Contact>().AddAsync(contact);
         }
 
         public void DeleteContact(Contact contact)

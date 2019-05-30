@@ -1,8 +1,9 @@
 ﻿using SocialNetwork.Domain.Contracts;
-using System;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using SocialNetwork.Domain.Dtos;
+using System.Threading.Tasks;
 
 namespace SocialNetwork.Domain.Business
 {
@@ -15,20 +16,25 @@ namespace SocialNetwork.Domain.Business
             _commentRepository = commentRepository;
         }
 
-        public IList<CommentDto> GetCommentsByPhotoId(int idPhoto)
+        public async Task<IList<CommentDto>> GetCommentsByUserPhotoId(int idUserPhoto)
         {
-            return _commentRepository
+            
+            return await _commentRepository
                 .GetUserPhotoComment()
+                .OrderByDescending(comment => comment.Id)
                 .Select(comment =>
                 new CommentDto
                 {
-
                     UserName = comment.User.Name,
                     CommentText = comment.CommentText,
-                    PhotoId = comment.UserPhotoId
+                    UserPhotoId = comment.UserPhotoId
 
-                }).Where(comment => comment.PhotoId == idPhoto)
-                .ToList();
+                })
+                .Where(comment => comment.UserPhotoId == idUserPhoto)
+                
+                .ToListAsync();
+         
         }
+        
     }
 }

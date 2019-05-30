@@ -4,6 +4,7 @@ using SocialNetwork.Domain.Entities;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace SocialNetwork.Domain.Business.ContactBusiness
 {
@@ -18,9 +19,10 @@ namespace SocialNetwork.Domain.Business.ContactBusiness
 
         public async Task<IList<ProfileDto>> GetAllProfileContactsByUserId(int userId)
         {
-            var contactList =  await _contactRepository.GetContactAsync();
             
-            return contactList
+            
+            return await _contactRepository
+                    .GetContact()
                     .Select(contact => contact)
                     .Where(contact => contact.FriendId == userId)
                     .Select(contact => new ProfileDto
@@ -32,7 +34,18 @@ namespace SocialNetwork.Domain.Business.ContactBusiness
                         Private = contact.User.Private
 
                     })
-                    .ToList();
+                    .ToListAsync();
+        }
+
+        public IList<int> GetListFriendIdByUserId(int userId)
+        {
+            return _contactRepository
+                .GetContact()
+                .Where(contact => contact.UserId == userId)
+                .Select(contact => contact.FriendId)
+                .ToList();
+                
+                
         }
 
         public IList<Contact> GetContactByUserIdFriendId(int userId, int friendId)

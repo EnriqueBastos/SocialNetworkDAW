@@ -9,14 +9,14 @@ namespace SocialNetwork.Application.Commands.UserCommands
     {
         private readonly IEditUserBusiness _editUserBusiness;
 
-        private readonly IRepository _repository;
-        public EditUserCommandHandler(IEditUserBusiness editUserBusiness , IRepository repository)
+        private readonly IUserRepository _repository;
+        public EditUserCommandHandler(IEditUserBusiness editUserBusiness , IUserRepository repository)
         {
             _editUserBusiness = editUserBusiness;
             _repository = repository;
         }
 
-        public async Task Handler(UserDto userDto)
+        public async Task Handler(SetUserDto userDto)
         {
             _editUserBusiness.EditUser(userDto);
 

@@ -1,11 +1,11 @@
 ﻿using SocialNetwork.Domain.Dtos;
 using System.Collections.Generic;
-
+using System.Threading.Tasks;
 
 namespace SocialNetwork.Domain.Business.MusicBusiness
 {
     public interface IGetMusicBusiness
     {
-         IList<MusicDto> GetListMusicByUserId(int UserId);
+        Task<IList<MusicDto>> GetListMusicByUserId(int UserId);
     }
 }

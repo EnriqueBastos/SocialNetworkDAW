@@ -3,6 +3,7 @@ using SocialNetwork.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace SocialNetwork.Domain.Business.UserBusiness
 {
@@ -12,14 +13,16 @@ namespace SocialNetwork.Domain.Business.UserBusiness
 
         private readonly IUserRepository _userRepository;
 
-        public DeleteUserBusiness(IGetUserBusiness getUserBusiness)
+        public DeleteUserBusiness(IGetUserBusiness getUserBusiness , IUserRepository userRepository)
         {
             _getUserBusiness = getUserBusiness;
+
+            _userRepository = userRepository;
         }
 
-        public void DeleteUserByUserId(int userId)
+        public async Task DeleteUserByUserId(int userId)
         {
-            var user = _getUserBusiness.GetUserDtoByUserId(userId);
+            var user = await _getUserBusiness.GetUserDtoByUserId(userId);
 
             _userRepository.DeleteUser(new User {
                 Id = user.Id,
@@ -32,6 +35,8 @@ namespace SocialNetwork.Domain.Business.UserBusiness
                 BackgroundApp = user.BackgroundApp,
                 Private = user.Private
             });
+
+            await _userRepository.UnitOfWork.Save();
         }
     }
 }

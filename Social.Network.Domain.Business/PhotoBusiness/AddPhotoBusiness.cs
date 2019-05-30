@@ -3,6 +3,7 @@ using SocialNetwork.Domain.Dtos;
 using SocialNetwork.Domain.Entities;
 using System;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace SocialNetwork.Domain.Business.PhotoBusiness
 {
@@ -15,18 +16,21 @@ namespace SocialNetwork.Domain.Business.PhotoBusiness
             _photoRepository = photoRepository;
         }
 
-        public void AddPhoto(PhotoDto photoDto)
+        public async Task AddPhoto(AddPhotoDto photoDto)
         {
+            DateTime dateTime = DateTime.Now;
+            byte[] bytesPhoto = Convert.FromBase64String(photoDto.ImageBytes);
             
-            byte[] bytesPhoto = Convert.FromBase64String(photoDto.ImageBytes); 
             _photoRepository.AddPhoto(new Photo
             {
-                Title = "KIKE",
+                Title = photoDto.Title,
                 ImageBytes = bytesPhoto,
-                UpdateDateTime = photoDto.UploadDateTime,
+                UpdateDateTime = dateTime,
                 Likes = 0,
                 Dislikes = 0
             });
+
+            await _photoRepository.UnitOfWork.Save();
         }
 
         public byte[] FileToByteArray(string fileName)

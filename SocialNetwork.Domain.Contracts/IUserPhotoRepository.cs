@@ -11,6 +11,9 @@ namespace SocialNetwork.Domain.Contracts
 
         void DeleteUserPhoto(UserPhoto photo);
 
-        
+        void AddUserPhoto(UserPhoto photo);
+
+
+
     }
 }

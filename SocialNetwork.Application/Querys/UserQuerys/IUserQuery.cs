@@ -1,17 +1,20 @@
 ﻿using SocialNetwork.Domain.Dtos;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace SocialNetwork.Application
 {
     public interface IUserQuery
     {
-        IList<ProfileDto> GetProfileList();
+        Task<IList<ProfileDto>> GetProfileList();
 
-        ProfileDetailsDto GetProfileDetailsDtoByUserId(int userId);
+        Task<ProfileDetailsDto> GetProfileDetailsDtoByUserId(int userId);
 
-        UserDto GetUserDtoByUserId(int userId);
+        Task<UserDto> GetUserDtoByUserId(int userId);
 
-        int GetUserIdByLoginDto(UserLoginDto loginDto);
+        Task<int> GetUserIdByLoginDto(UserLoginDto loginDto);
+
+        Task<IList<ProfileDto>> GetProfileDtosBySearchContactDto(SearchContactDto searchContactDto);
 
 
 

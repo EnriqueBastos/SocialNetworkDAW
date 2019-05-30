@@ -1,53 +1,47 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using SocialNetwork.Application.Commands.PhotoCommands;
-using System.Web.Http;
-using SocialNetwork.Domain.Contracts;
+using SocialNetwork.Application.Commands.UserPhotoCommentCommands;
 using SocialNetwork.Domain.Dtos;
 
 namespace SocialNetwork.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    public class PhotoController : ControllerBase
+    public class UserPhotoCommentController : ControllerBase
     {
-        IAddPhotoCommandHandler _addPhotoCommandHandler;
-        public PhotoController(IAddPhotoCommandHandler addPhotoCommandHandler)
+        private readonly IAddUserPhotoCommentCommandHandler _addUserPhotoCommentCommandHandler;
+
+        public UserPhotoCommentController(IAddUserPhotoCommentCommandHandler addUserPhotoCommentCommandHandler)
         {
-            _addPhotoCommandHandler = addPhotoCommandHandler;
+            _addUserPhotoCommentCommandHandler = addUserPhotoCommentCommandHandler;
         }
-        // GET: api/Photo
+        // GET: api/UserPhotoComment
         [HttpGet]
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
         }
 
-        // GET: api/Photo/5
-        [HttpGet("{id}", Name = "GetPhotos")]
+        // GET: api/UserPhotoComment/5
+        [HttpGet("{id}", Name = "GetComments")]
         public string Get(int id)
         {
             return "value";
         }
 
-        // POST: api/Photo
+        // POST: api/UserPhotoComment/addcomment
         [HttpPost]
-        [ActionName("UploadPhoto")]
-
-        public async Task UploadPhoto([FromBody] PhotoDto photo)
+        [ActionName("addComment")]
+        public async Task AddUserPhotoComment([FromBody] CommentDto comment)
         {
-
-            await _addPhotoCommandHandler.Handler(photo);
+            await _addUserPhotoCommentCommandHandler.Handler(comment);
         }
 
-        
-
-        // PUT: api/Photo/5
+        // PUT: api/UserPhotoComment/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
