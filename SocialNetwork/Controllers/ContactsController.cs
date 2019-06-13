@@ -16,12 +16,12 @@ namespace SocialNetwork.Controllers
     [ApiController]
     public class ContactsController : ControllerBase
     {
-        IContactQuery _contactQuery;
-        IUserQuery _userQuery;
-        IAddContactCommandHandler _addContactCommandHandler;
-        IDeleteContactNotificationCommandHandler _deleteContactNotificationCommandHandler;
-        IAddContactNotificationCommandHandler _addContactNotificationCommandHandler;
-        IDeleteContactCommandHandler _deleteContactCommandHandler;
+        private readonly IContactQuery _contactQuery;
+        private readonly IUserQuery _userQuery;
+        private readonly IAddContactCommandHandler _addContactCommandHandler;
+        private readonly IDeleteContactNotificationCommandHandler _deleteContactNotificationCommandHandler;
+        private readonly IAddContactNotificationCommandHandler _addContactNotificationCommandHandler;
+        private readonly IDeleteContactCommandHandler _deleteContactCommandHandler;
         public ContactsController(
             IContactQuery contactQuery,
             IUserQuery userQuery ,
@@ -50,11 +50,12 @@ namespace SocialNetwork.Controllers
 
         }
         // POST: api/Contacts/searchContacts
+        
         [HttpPost]
         [ActionName("searchContacts")]
         public async Task<IList<ProfileDto>> GetContactsProfileByContactDto([FromBody]SearchContactDto searchContactDto)
         {
-            return await _userQuery.GetProfileDtosBySearchContactDto(searchContactDto);
+            return await _contactQuery.SearchContactBySearchContactDto(searchContactDto);
 
         }
 

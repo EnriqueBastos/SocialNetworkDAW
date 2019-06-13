@@ -1,11 +1,10 @@
-﻿using SocialNetwork.Domain.Dtos;
-using System.Collections.Generic;
+﻿using SocialNetwork.Domain.Dtos.MusicDtos;
 using System.Threading.Tasks;
 
 namespace SocialNetwork.Application.MusicQuerys
 {
     public interface IMusicQuery
     {
-        Task<IList<MusicDto>> GetListMusicByUserId(int UserId);
+        Task<ListMusicDto> GetListMusicByUserId(int userId);
     }
 }

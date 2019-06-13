@@ -4,20 +4,25 @@ using SocialNetwork.Application;
 using SocialNetwork.Application.Commands;
 using SocialNetwork.Application.Commands.ContactCommands;
 using SocialNetwork.Application.Commands.ContactNotificationCommands;
+using SocialNetwork.Application.Commands.MessageChatCommands;
 using SocialNetwork.Application.Commands.MusicCommands;
 using SocialNetwork.Application.Commands.PhotoCommands;
 using SocialNetwork.Application.Commands.UserCommands;
 using SocialNetwork.Application.Commands.UserPhotoCommands;
 using SocialNetwork.Application.Commands.UserPhotoCommentCommands;
 using SocialNetwork.Application.MusicQuerys;
+using SocialNetwork.Application.Querys.ChatQuerys;
 using SocialNetwork.Application.Querys.ContactQuerys;
+using SocialNetwork.Application.Querys.MessageChatQuerys;
 using SocialNetwork.Domain.Business;
+using SocialNetwork.Domain.Business.ChatBusiness;
 using SocialNetwork.Domain.Business.CommentBusiness;
 using SocialNetwork.Domain.Business.ContactBusiness;
 using SocialNetwork.Domain.Business.ContactNotificationBusiness;
+using SocialNetwork.Domain.Business.MessageChatBusiness;
+using SocialNetwork.Domain.Business.MessageChatRepository;
 using SocialNetwork.Domain.Business.MusicBusiness;
 using SocialNetwork.Domain.Business.PhotoBusiness;
-
 using SocialNetwork.Domain.Business.UserBusiness;
 using SocialNetwork.Domain.Business.UserPhotoBusiness;
 using SocialNetwork.Domain.Contracts;
@@ -48,6 +53,8 @@ namespace SocialNetwork
             //Music dependencies
             services.AddTransient<IMusicQuery, MusicQuery>();
             services.AddTransient<IAddMusicCommandHandler, AddMusicCommandHandler>();
+            services.AddTransient<IDeleteMusicCommandHandler, DeleteMusicCommandHandler>();
+            services.AddTransient<IDeleteMusicBusiness, DeleteMusicBusiness>();
             services.AddTransient<IGetMusicBusiness, GetMusicBusiness>();
             services.AddTransient<IAddMusicBusiness, AddMusicBusiness>();
             services.AddTransient<IMusicRepository, MusicRepository>();
@@ -84,6 +91,21 @@ namespace SocialNetwork
             services.AddTransient<IDeleteContactNotificationBusiness, DeleteContactNotificationBusiness>();
             services.AddTransient<IDeleteContactNotificationCommandHandler, DeleteContactNotificationCommandHandler>();
             services.AddTransient<IAddContactNotificationCommandHandler, AddContactNotificationCommandHandler>();
+
+            //MessageChat dependencies
+            services.AddTransient<IMessageChatRepository, MessageChatRepository>();
+            services.AddTransient<IAddMessageChatBusiness, AddMessageChatBusiness>();
+            services.AddTransient<IReadMessagesChatCommandHandler, ReadMessagesChatCommandHandler>();
+            services.AddTransient<IEditMessageChatBusiness, EditMessageChatBusiness>();
+            services.AddTransient<IGetMessageChatBusiness, GetMessageChatBusiness>();
+            services.AddTransient<IAddMessageChatCommandHandler, AddMessageChatCommandHandler>();
+            services.AddTransient<IMessageChatQuery, MessageChatQuery>();
+
+            //Chat dependencies
+            services.AddTransient<IChatRepository, ChatRepository>();
+            services.AddTransient<IGetChatBusiness , GetChatBusiness> ();
+            services.AddTransient<IAddChatBusiness, AddChatBusiness>();
+            services.AddTransient<IChatQuery, ChatQuery>();
             
         }
     }

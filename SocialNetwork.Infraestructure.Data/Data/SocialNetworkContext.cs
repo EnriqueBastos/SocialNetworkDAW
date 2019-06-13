@@ -23,15 +23,13 @@ namespace SocialNetwork.Data
 
         public DbSet<UserPhoto> UserPhotos { get; set; }
 
-        public DbSet<Chat> Chats { get; set; }
-
         public DbSet<Contact> Contacts { get; set; }
-
-        public DbSet<GroupChat> GroupChats { get; set; }
 
         public DbSet<MessageChat> MessageChats { get; set; }
 
         public DbSet<ContactNotification> ContactNotifications { get; set; }
+
+        public DbSet<Chat> Chats { get; set; }
 
         public async Task Save()
         {

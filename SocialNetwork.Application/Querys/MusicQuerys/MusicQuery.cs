@@ -1,5 +1,6 @@
 ﻿using SocialNetwork.Domain.Business.MusicBusiness;
-using SocialNetwork.Domain.Dtos;
+using SocialNetwork.Domain.Business.UserBusiness;
+using SocialNetwork.Domain.Dtos.MusicDtos;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,19 +10,28 @@ namespace SocialNetwork.Application.MusicQuerys
 {
     public class MusicQuery : IMusicQuery
     {
-        private readonly IGetMusicBusiness _getMusic;
+        private readonly IGetMusicBusiness _getMusicBusiness;
+        private readonly IGetUserBusiness _getUserBusiness;
 
 
-        public MusicQuery(IGetMusicBusiness getMusic)
+        public MusicQuery(IGetMusicBusiness getMusicBusiness, IGetUserBusiness getUserBusiness)
         {
-            _getMusic = getMusic;
+            _getMusicBusiness = getMusicBusiness;
+            _getUserBusiness = getUserBusiness;
 
             
         }
 
-        public async Task<IList<MusicDto>> GetListMusicByUserId(int UserId)
+        public async Task<ListMusicDto> GetListMusicByUserId(int userId)
         {
-            return  await _getMusic.GetListMusicByUserId(UserId);
+            var musicDtos =  await _getMusicBusiness.GetListMusicByUserId(userId);
+            var userName = await _getUserBusiness.GetUserNameByUserId(userId);
+
+            return new ListMusicDto
+            {
+                UserName = userName,
+                MusicDtos = musicDtos
+            };
         }
 
        

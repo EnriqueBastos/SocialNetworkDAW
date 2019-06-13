@@ -18,20 +18,21 @@ namespace SocialNetwork.Domain.Business.MusicBusiness
             _musicRepository = musicRepository;
         }
 
-        public async Task<IList<MusicDto>> GetListMusicByUserId(int UserId)
+        public async Task<IList<MusicDto>> GetListMusicByUserId(int userId)
         {
             return await _musicRepository
                 .GetMusic()
+                .Include( music => music.User)
+                .Where(music => music.UserId == userId)
                 .OrderByDescending(music => music)
                 .Select(music =>
                     new MusicDto
                     {
                         MusicId = music.Id,
-                        UserId = music.User.Id,
+                        UserId = music.UserId,
                         UrlVideo = music.UrlVideo
                     }
-                ).Where(music => music.UserId == UserId)
-                .ToListAsync();
+                ) .ToListAsync();
         }
     }
 }

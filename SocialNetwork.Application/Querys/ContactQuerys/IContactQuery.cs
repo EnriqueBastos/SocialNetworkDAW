@@ -7,5 +7,6 @@ namespace SocialNetwork.Application.Querys.ContactQuerys
     public interface IContactQuery
     {
         Task<IList<ProfileDto>> GetListContactProfileByUserId(int userId);
+        Task<IList<ProfileDto>> SearchContactBySearchContactDto(SearchContactDto searchContactDto);
     }
 }

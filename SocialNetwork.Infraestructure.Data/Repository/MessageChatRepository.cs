@@ -1,8 +1,9 @@
-﻿using SocialNetwork.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using SocialNetwork.Data;
 using SocialNetwork.Domain.Contracts;
 using SocialNetwork.Domain.Entities;
 using System.Linq;
-
+using System.Threading.Tasks;
 
 namespace SocialNetwork.Infraestructure.Repository
 {
@@ -14,19 +15,26 @@ namespace SocialNetwork.Infraestructure.Repository
         {
             _socialNetworkContext = socialNetworkContext;
         }
-        public IUnitOfWork UnitOfWork
-        {
-            get { return _socialNetworkContext; }
-        }
 
-        public void AddMessageChat(MessageChat message)
+        public async Task AddMessageChat(MessageChat message)
         {
-            _socialNetworkContext.Set<MessageChat>().Add(message);
+            await _socialNetworkContext.Set<MessageChat>().AddAsync(message);
         }
 
         public IQueryable<MessageChat> GetMessageChat()
         {
             return _socialNetworkContext.Set<MessageChat>();
+        }
+
+        public void EditMessageChat(MessageChat messageChat)
+        {
+            _socialNetworkContext.Entry(messageChat).State = EntityState.Modified;
+        }
+
+
+        public IUnitOfWork UnitOfWork
+        {
+            get { return _socialNetworkContext; }
         }
     }
 }

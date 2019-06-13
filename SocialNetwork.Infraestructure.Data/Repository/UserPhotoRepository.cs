@@ -26,9 +26,9 @@ namespace SocialNetwork.Infraestructure.Repository
             
         }
 
-        public void AddUserPhoto(UserPhoto photo)
+        public async Task AddUserPhoto(UserPhoto photo)
         {
-            _socialNetworkContext.Set<UserPhoto>().Add(photo);
+            await _socialNetworkContext.Set<UserPhoto>().AddAsync(photo);
         }
 
         public IUnitOfWork UnitOfWork

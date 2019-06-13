@@ -1,10 +1,10 @@
 ﻿using SocialNetwork.Domain.Dtos;
-
+using System.Threading.Tasks;
 
 namespace SocialNetwork.Domain.Business.UserBusiness
 {
     public interface IAddUserBusiness
     {
-        void AddUser(UserDto user);
+        Task AddUser(UserDto user);
     }
 }

@@ -9,7 +9,7 @@ namespace SocialNetwork.Domain.Contracts
     {
         IQueryable<User> GetUser();
 
-        void AddUser(User user);
+        Task AddUser(User user);
 
         void DeleteUser(User user);
 

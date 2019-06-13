@@ -1,10 +1,11 @@
 ﻿using SocialNetwork.Domain.Dtos;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace SocialNetwork.Domain.Business.ContactBusiness
 {
     public interface IAddContactBusiness
     {
-        Task AddContact(ContactDto contactDto);
+        Task<IList<int>> AddContact(ContactDto contactDto);
     }
 }

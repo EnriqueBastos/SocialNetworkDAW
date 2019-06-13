@@ -1,4 +1,4 @@
-﻿
+﻿using System;
 
 namespace SocialNetwork.Domain.Entities
 {
@@ -10,6 +10,7 @@ namespace SocialNetwork.Domain.Entities
 
         public int FriendId { get; set; }
 
+        
         public User User { get; set; }
 
     }

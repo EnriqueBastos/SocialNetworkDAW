@@ -20,7 +20,7 @@ namespace SocialNetwork.Controllers
 
         private readonly IUserQuery _userQuery;
 
-        IEditUserCommandHandler _editUserCommandHandler;
+        private readonly IEditUserCommandHandler _editUserCommandHandler;
 
         public UserController(IAddUserCommandHandler addUserCommandHandler, IUserQuery userQuery , IEditUserCommandHandler editUserCommandHandler )
         {
@@ -49,9 +49,9 @@ namespace SocialNetwork.Controllers
         // POST: api/User
         [HttpPost]
         [ActionName("AddUser")]
-        public async Task AddUser(UserDto userDto)
+        public async Task<int> AddUser(UserDto userDto)
         {
-            await _addUserCommandHandler.Handler(userDto);
+            return await  _addUserCommandHandler.Handler(userDto);
         }
 
         [HttpPost]

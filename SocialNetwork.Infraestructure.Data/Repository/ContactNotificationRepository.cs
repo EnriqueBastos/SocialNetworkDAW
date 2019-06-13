@@ -2,6 +2,7 @@
 using SocialNetwork.Domain.Contracts;
 using SocialNetwork.Domain.Entities;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace SocialNetwork.Infraestructure.Repository
 {
@@ -19,9 +20,9 @@ namespace SocialNetwork.Infraestructure.Repository
             return _socialNetworkContext.Set<ContactNotification>();
         }
 
-        public void AddContactNotification(ContactNotification contactNotification)
+        public async Task AddContactNotification(ContactNotification contactNotification)
         {
-            _socialNetworkContext.Set<ContactNotification>().Add(contactNotification);
+            await _socialNetworkContext.Set<ContactNotification>().AddAsync(contactNotification);
         }
 
         public void DeleteContactNotification(ContactNotification contactNotification)

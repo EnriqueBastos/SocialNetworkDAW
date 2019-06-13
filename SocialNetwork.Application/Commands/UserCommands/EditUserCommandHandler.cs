@@ -18,7 +18,7 @@ namespace SocialNetwork.Application.Commands.UserCommands
 
         public async Task Handler(SetUserDto userDto)
         {
-            _editUserBusiness.EditUser(userDto);
+            await _editUserBusiness.EditUser(userDto);
 
             await _repository.UnitOfWork.Save();
 

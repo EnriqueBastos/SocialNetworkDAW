@@ -25,7 +25,9 @@ namespace SocialNetwork.Infraestructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ChatName");
+                    b.Property<int>("ContactFriendUserId");
+
+                    b.Property<int>("ContactUserFriendId");
 
                     b.HasKey("Id");
 
@@ -66,25 +68,6 @@ namespace SocialNetwork.Infraestructure.Migrations
                     b.ToTable("ContactNotifications");
                 });
 
-            modelBuilder.Entity("SocialNetwork.Domain.Entities.GroupChat", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("ChatId");
-
-                    b.Property<int>("UserId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ChatId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("GroupChats");
-                });
-
             modelBuilder.Entity("SocialNetwork.Domain.Entities.MessageChat", b =>
                 {
                     b.Property<int>("Id")
@@ -92,6 +75,8 @@ namespace SocialNetwork.Infraestructure.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("ChatId");
+
+                    b.Property<bool>("IsSeen");
 
                     b.Property<DateTime>("MessageDate");
 
@@ -231,23 +216,10 @@ namespace SocialNetwork.Infraestructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("SocialNetwork.Domain.Entities.GroupChat", b =>
-                {
-                    b.HasOne("SocialNetwork.Domain.Entities.Chat", "Chat")
-                        .WithMany()
-                        .HasForeignKey("ChatId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("SocialNetwork.Domain.Entities.User", "User")
-                        .WithMany("GroupChats")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("SocialNetwork.Domain.Entities.MessageChat", b =>
                 {
-                    b.HasOne("SocialNetwork.Domain.Entities.Chat", "Chat")
-                        .WithMany()
+                    b.HasOne("SocialNetwork.Domain.Entities.Chat")
+                        .WithMany("MessageChats")
                         .HasForeignKey("ChatId")
                         .OnDelete(DeleteBehavior.Cascade);
 

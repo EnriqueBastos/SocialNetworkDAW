@@ -1,17 +1,16 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SocialNetwork.Domain.Entities
 {
-
     public class Chat
     {
         public int Id { get; set; }
-        public string ChatName { get; set; }
 
-        }
-    
+        public int ContactUserFriendId { get; set; }
 
+        public int ContactFriendUserId { get; set; }
+
+        public ICollection<MessageChat> MessageChats {get; set;}
+    }
 }

@@ -25,6 +25,8 @@ namespace SocialNetwork.Domain.Business
                 .Select(comment =>
                 new CommentDto
                 {
+                    Id = comment.Id,
+                    UserId = comment.UserId,
                     UserName = comment.User.Name,
                     CommentText = comment.CommentText,
                     UserPhotoId = comment.UserPhotoId

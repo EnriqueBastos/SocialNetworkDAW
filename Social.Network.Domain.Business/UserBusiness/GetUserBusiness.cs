@@ -3,8 +3,11 @@ using SocialNetwork.Domain.Business.ContactBusiness;
 using SocialNetwork.Domain.Business.ContactNotificationBusiness;
 using SocialNetwork.Domain.Contracts;
 using SocialNetwork.Domain.Dtos;
+using SocialNetwork.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 
 namespace SocialNetwork.Domain.Business.UserBusiness
@@ -15,19 +18,16 @@ namespace SocialNetwork.Domain.Business.UserBusiness
 
         private readonly IGetContactNotificationBusiness _getContactNotificationBusiness;
 
-        private readonly IGetContactBusiness _getContactBusiness;
-
         public GetUserBusiness(
             IUserRepository userRepository,
-            IGetContactNotificationBusiness getContactNotificationBusiness,
-            IGetContactBusiness getContactBusiness
+            IGetContactNotificationBusiness getContactNotificationBusiness
             )
         {
             _userRepository = userRepository;
 
             _getContactNotificationBusiness = getContactNotificationBusiness;
 
-            _getContactBusiness = getContactBusiness;
+           
         }
 
         
@@ -35,6 +35,7 @@ namespace SocialNetwork.Domain.Business.UserBusiness
 
         public async Task<UserDto> GetUserDtoByUserId(int UserId)
         {
+
             return await _userRepository
                 .GetUser()
                 .Select(user =>new UserDto
@@ -66,6 +67,7 @@ namespace SocialNetwork.Domain.Business.UserBusiness
                     UserId = user.Id,
                     UserName = user.Name,
                     UserLastName = user.LastName,
+                    Password = user.Password,
                     DateBirthday = user.DateBirthday,
                     PhotoProfile = user.PhotoProfile,
                     BackgroundApp = user.BackgroundApp,
@@ -99,11 +101,28 @@ namespace SocialNetwork.Domain.Business.UserBusiness
             var userLogin = await _userRepository
                             .GetUser()
                             .FirstOrDefaultAsync(user =>
-
-                            user.Email == loginDto.Email && user.Password == loginDto.Password
-
+                                user.Email == loginDto.Email
                             );
-            if(userLogin != null)
+            if(userLogin == null)
+            {
+                return -1;
+            }
+            string savedPasswordHash = userLogin.Password;
+            byte[] hashBytes = Convert.FromBase64String(savedPasswordHash);
+            byte[] salt = new byte[16];
+            Array.Copy(hashBytes, 0, salt, 0, 16);
+            var pbkdf2 = new Rfc2898DeriveBytes(loginDto.Password, salt, 10000);
+            byte[] hash = pbkdf2.GetBytes(20);
+            bool ok = true;
+            for(int f = 0; f < 20; f++)
+            {
+                if(hashBytes[f + 16] != hash[f])
+                {
+                    ok = false;
+                }
+            }
+
+            if (ok)
             {
                 return userLogin.Id;
             }
@@ -115,11 +134,19 @@ namespace SocialNetwork.Domain.Business.UserBusiness
                 
         }
 
-        public async Task<IList<ProfileDto>> GetProfileDtosBySearchContactDto(SearchContactDto searchContactDto)
+        public async Task<string> GetUserNameByUserId(int userId)
         {
-            var listContacts = await _userRepository
+            var user = await _userRepository
                 .GetUser()
-                .Where(user => user.Name == searchContactDto.UserName)
+                .FirstOrDefaultAsync(x => x.Id == userId);
+            return user.Name;
+        }
+
+        public async Task<IList<ProfileDto>> GetListProfileDtosByUserNameUserId(string userName, int userId)
+        {
+            return await _userRepository
+                .GetUser()
+                .Where(user => user.Name == userName && user.Id != userId)
                 .Select(user => new ProfileDto
                 {
                     UserId = user.Id,
@@ -130,42 +157,18 @@ namespace SocialNetwork.Domain.Business.UserBusiness
 
                 })
                 .ToListAsync();
-
-            var listFriends =   await _getContactBusiness.GetAllProfileContactsByUserId(searchContactDto.UserId);
-
-            
-
-
-            bool continueFor = true;
-
-            for(int f = 0; f < listContacts.Count; f++)
-            {
-                if (await _getContactNotificationBusiness.GetBoolContactNotification(searchContactDto.UserId , listContacts[f].UserId))
-                {
-                    listContacts[f].FriendRequestIsSent = true;
-                }
-                else
-                {
-                    listContacts[f].FriendRequestIsSent = false;
-                }
-                for (int k = 0; k < listFriends.Count && continueFor; k++)
-                {
-                    if(listContacts[f].UserId == listFriends[k].UserId)
-                    {
-                        listContacts[f].IsFriend = true;
-                        continueFor = false;
-                    }
-                    else
-                    {
-                        listContacts[f].IsFriend = false;
-                    }
-                }
-                continueFor = true;
-            }
-
-            return listContacts;
         }
 
-        
+        public async Task<string> GetPasswordByUserId(int userId)
+        {
+            var user = await _userRepository.GetUser().FirstOrDefaultAsync(u => u.Id == userId);
+
+            return user.Password;
+        }
+
+        public async Task<User> GetUserByUserId(int id)
+        {
+            return await _userRepository.GetUser().FirstOrDefaultAsync(u => u.Id == id);
+        }
     }
 }

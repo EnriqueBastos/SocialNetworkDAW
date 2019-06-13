@@ -3,6 +3,7 @@ using SocialNetwork.Data;
 using SocialNetwork.Domain.Contracts;
 using SocialNetwork.Domain.Entities;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace SocialNetwork.Infraestructure.Repository
 {
@@ -15,9 +16,9 @@ namespace SocialNetwork.Infraestructure.Repository
             _socialNetworkContext = socialNetworkContext;
         }
 
-        public void AddPhoto(Photo photo)
+        public async Task AddPhoto(Photo photo)
         {
-            _socialNetworkContext.Set<Photo>().Add(photo);
+            await _socialNetworkContext.Set<Photo>().AddAsync(photo);
         }
 
         public IQueryable<Photo> GetPhoto()

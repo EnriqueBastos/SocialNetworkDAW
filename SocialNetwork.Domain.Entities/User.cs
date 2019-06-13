@@ -29,8 +29,7 @@ namespace SocialNetwork.Domain.Entities
         public ICollection<UserPhotoComment> UserPhotoComments { get; set; }
 
         public ICollection<Music> Musics { get; set; }
-
-        public ICollection<GroupChat> GroupChats { get; set; }
+        
 
     }
 }

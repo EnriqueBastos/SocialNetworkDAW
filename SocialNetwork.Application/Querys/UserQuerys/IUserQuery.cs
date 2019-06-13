@@ -14,7 +14,7 @@ namespace SocialNetwork.Application
 
         Task<int> GetUserIdByLoginDto(UserLoginDto loginDto);
 
-        Task<IList<ProfileDto>> GetProfileDtosBySearchContactDto(SearchContactDto searchContactDto);
+        //Task<IList<ProfileDto>> GetProfileDtosBySearchContactDto(SearchContactDto searchContactDto);
 
 
 

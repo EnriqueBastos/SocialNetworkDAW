@@ -2,6 +2,7 @@
 
 using SocialNetwork.Domain.Entities;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace SocialNetwork.Domain.Contracts
 {
@@ -10,7 +11,7 @@ namespace SocialNetwork.Domain.Contracts
 
         IQueryable<Photo> GetPhoto();
 
-        void AddPhoto(Photo photo);
+        Task AddPhoto(Photo photo);
 
         void DeletePhoto(Photo photo);
 

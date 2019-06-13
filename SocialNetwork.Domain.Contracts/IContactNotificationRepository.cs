@@ -1,6 +1,6 @@
 ﻿using SocialNetwork.Domain.Entities;
 using System.Linq;
-
+using System.Threading.Tasks;
 
 namespace SocialNetwork.Domain.Contracts
 {
@@ -8,7 +8,7 @@ namespace SocialNetwork.Domain.Contracts
     {
         IQueryable<ContactNotification> GetContactNotification();
 
-        void AddContactNotification(ContactNotification contactNotification);
+        Task AddContactNotification(ContactNotification contactNotification);
 
         void DeleteContactNotification(ContactNotification contactNotification);
     }

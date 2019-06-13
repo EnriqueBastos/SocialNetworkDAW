@@ -1,7 +1,13 @@
-﻿namespace SocialNetwork.Domain.Business.ChatBusiness
+﻿using SocialNetwork.Domain.Entities;
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SocialNetwork.Domain.Business.ChatBusiness
 {
     public interface IAddChatBusiness
     {
-        void AddChat(string chat);
+        Task AddChat(int contactUserFriendId, int contactFriendUserId);
     }
 }

@@ -5,6 +5,6 @@ namespace SocialNetwork.Application.Commands
 {
     public interface IAddUserCommandHandler
     {
-        Task Handler(UserDto user);
+        Task<int> Handler(UserDto user);
     }
 }

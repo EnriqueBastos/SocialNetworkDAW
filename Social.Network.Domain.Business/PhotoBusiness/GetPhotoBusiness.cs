@@ -1,11 +1,11 @@
-﻿using SocialNetwork.Domain.Contracts;
-using System;
-using System.Linq;
+﻿using Microsoft.EntityFrameworkCore;
+using SocialNetwork.Domain.Contracts;
+using SocialNetwork.Domain.Entities;
 using System.Threading.Tasks;
 
 namespace SocialNetwork.Domain.Business.PhotoBusiness
 {
-    public class GetPhotoBusiness :IGetPhotoBusiness
+    public class GetPhotoBusiness : IGetPhotoBusiness
     {
         private readonly IPhotoRepository _photoRepository;
 
@@ -14,12 +14,11 @@ namespace SocialNetwork.Domain.Business.PhotoBusiness
             _photoRepository = photoRepository;
         }
 
-        public int GetIdLastPhoto()
+        public async Task<Photo> GetLastPhoto()
         {
-            return _photoRepository
+            return await _photoRepository
                 .GetPhoto()
-                .LastOrDefault()
-                .Id;
+                .LastOrDefaultAsync();
         }
     }
 }

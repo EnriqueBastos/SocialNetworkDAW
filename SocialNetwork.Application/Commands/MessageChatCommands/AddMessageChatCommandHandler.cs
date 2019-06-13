@@ -18,7 +18,7 @@ namespace SocialNetwork.Application.Commands.MessageChatCommands
 
         public async Task Handler(MessageChatDto message)
         {
-            _addMessageChatBusiness.AddChatMessage(message);
+            await _addMessageChatBusiness.AddChatMessage(message);
             await _messageChatRepository.UnitOfWork.Save();
 
         }

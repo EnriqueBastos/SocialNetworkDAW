@@ -6,6 +6,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SocialNetwork.Data;
 using Microsoft.EntityFrameworkCore;
+using SocialNetwork.Controllers;
+using SocialNetwork.Hubs;
 
 namespace SocialNetwork
 {
@@ -33,8 +35,12 @@ namespace SocialNetwork
 
             services.AddCors(options =>
             {
-                options.AddPolicy("AllowMyOrigin",
-                builder => builder.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod());
+                options.AddPolicy("CorsPolicy",
+                builder =>
+                builder.AllowAnyHeader()
+                    .AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowCredentials());
             });
             
             
@@ -45,6 +51,7 @@ namespace SocialNetwork
                 );
                 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,9 +65,14 @@ namespace SocialNetwork
             {
                 app.UseHsts();
             }
-            app.UseCors("AllowMyOrigin");
+            app.UseCors("CorsPolicy");
             app.UseHttpsRedirection();
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<ChatHub>("/SignalR/ChatMessages");
+            });
             app.UseMvc();
+            
         }
     }
 }

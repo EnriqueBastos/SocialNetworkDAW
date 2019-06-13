@@ -41,12 +41,6 @@ namespace SocialNetwork.Application
         {
             return await _getUserBusiness.GetProfileDetailsDtoByUserId(userId);
         }
-        
-        public async Task<IList<ProfileDto>> GetProfileDtosBySearchContactDto(SearchContactDto searchContactDto)
-        {
-            return await _getUserBusiness
-                .GetProfileDtosBySearchContactDto(searchContactDto);
-        }
 
         
     }

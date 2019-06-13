@@ -1,8 +1,6 @@
 ﻿using SocialNetwork.Domain.Contracts;
 using SocialNetwork.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Threading.Tasks;
 
 namespace SocialNetwork.Domain.Business.ChatBusiness
 {
@@ -15,13 +13,13 @@ namespace SocialNetwork.Domain.Business.ChatBusiness
             _chatRepository = chatRepository;
         }
 
-        public void AddChat(string chat)
+        public async Task AddChat (int contactUserFriendId ,  int contactFriendUserId)
         {
-            _chatRepository.AddChat(new Chat
+            await _chatRepository.AddChat(new Chat
             {
-                ChatName = chat
+                ContactFriendUserId = contactFriendUserId,
+                ContactUserFriendId = contactUserFriendId
             });
         }
-
     }
 }

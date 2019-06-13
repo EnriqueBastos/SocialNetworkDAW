@@ -28,15 +28,17 @@ namespace SocialNetwork.Domain.Business.UserPhotoBusiness
         {
             await _addPhotoBusiness.AddPhoto(newPhoto);
 
-            int photoId = _getPhotoBusiness.GetIdLastPhoto();
+            await _userPhotoRepository.UnitOfWork.Save();
 
-            _userPhotoRepository.AddUserPhoto(new UserPhoto
+            var photo = await _getPhotoBusiness.GetLastPhoto();
+
+            await _userPhotoRepository.AddUserPhoto(new UserPhoto
             {
-                PhotoId = photoId,
+                PhotoId = photo.Id,
                 UserId = newPhoto.UserId
             });
 
-            await _userPhotoRepository.UnitOfWork.Save();
+            
         }
     }
 }

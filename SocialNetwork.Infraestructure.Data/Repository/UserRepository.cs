@@ -3,6 +3,7 @@ using SocialNetwork.Data;
 using SocialNetwork.Domain.Contracts;
 using SocialNetwork.Domain.Entities;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace SocialNetwork.Infraestructure.Repository
 {
@@ -16,9 +17,9 @@ namespace SocialNetwork.Infraestructure.Repository
         {
             _socialNetworkContext = socialNetworkContext;
         }
-        public void AddUser(User user)
+        public async Task AddUser(User user)
         {
-             _socialNetworkContext.Set<User>().AddAsync(user);
+             await _socialNetworkContext.Set<User>().AddAsync(user);
              
         }
 

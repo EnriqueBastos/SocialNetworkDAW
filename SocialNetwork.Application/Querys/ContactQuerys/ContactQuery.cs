@@ -19,6 +19,16 @@ namespace SocialNetwork.Application.Querys.ContactQuerys
         public async Task<IList<ProfileDto>> GetListContactProfileByUserId(int userId)
         {
             return  await _getContactBusiness.GetAllProfileContactsByUserId(userId);
-        } 
+        }
+
+        public async Task<IList<ProfileDto>> SearchContactBySearchContactDto(SearchContactDto searchContactDto)
+        {
+            return await _getContactBusiness.GetProfileDtosBySearchContactDto(searchContactDto);
+        }
+
+        
+
+
+
     }
 }

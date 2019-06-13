@@ -21,7 +21,7 @@ namespace SocialNetwork.Domain.Business.PhotoBusiness
             DateTime dateTime = DateTime.Now;
             byte[] bytesPhoto = Convert.FromBase64String(photoDto.ImageBytes);
             
-            _photoRepository.AddPhoto(new Photo
+            await _photoRepository.AddPhoto(new Photo
             {
                 Title = photoDto.Title,
                 ImageBytes = bytesPhoto,
@@ -30,7 +30,7 @@ namespace SocialNetwork.Domain.Business.PhotoBusiness
                 Dislikes = 0
             });
 
-            await _photoRepository.UnitOfWork.Save();
+           
         }
 
         public byte[] FileToByteArray(string fileName)
