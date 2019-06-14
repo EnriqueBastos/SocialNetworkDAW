@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace SocialNetwork.Domain.Business.UserPhotoBusiness
 {
     public interface IDeleteUserPhotoBusiness
     {
-        void DeletePhotoByPhotoId(int PhotoId);
+        Task DeletePhotoByPhotoId(int PhotoId);
     }
 }

@@ -36,11 +36,11 @@ namespace SocialNetwork.Domain.Business.UserPhotoBusiness
             
         }
 
-        public UserPhoto GetUserPhotoByPhotoId(int PhotoId)
+        public async Task<UserPhoto> GetUserPhotoByPhotoId(int PhotoId)
         {
-            return _userPhotoRepository
+            return await _userPhotoRepository
                 .GetUserPhoto()
-                .FirstOrDefault(userPhoto =>
+                .FirstOrDefaultAsync(userPhoto =>
                 userPhoto.Photo.Id == PhotoId
                );
         }

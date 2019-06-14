@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using SocialNetwork.Application;
 using SocialNetwork.Application.Commands.UserPhotoCommands;
 using SocialNetwork.Domain.Dtos;
+using SocialNetwork.Domain.Dtos.PhotoDtos;
 
 namespace SocialNetwork.Controllers
 {
@@ -16,20 +17,19 @@ namespace SocialNetwork.Controllers
     {
         IUserPhotoQuery _userPhotoQuery;
         IAddUserPhotoCommandHandler _addUserPhotoCommandHandler;
+        IDeleteUserPhotoCommandHandler _deleteUserPhotoCommandHandler;
 
-        public UserPhotoController(IUserPhotoQuery userPhotoQuery, IAddUserPhotoCommandHandler addUserPhotoCommandHandler)
+        public UserPhotoController(
+            IUserPhotoQuery userPhotoQuery,
+            IAddUserPhotoCommandHandler addUserPhotoCommandHandler,
+            IDeleteUserPhotoCommandHandler deleteUserPhotoCommandHandler
+            )
         {
             _userPhotoQuery = userPhotoQuery;
-
             _addUserPhotoCommandHandler = addUserPhotoCommandHandler;
+            _deleteUserPhotoCommandHandler = deleteUserPhotoCommandHandler;
         }
-        // GET: api/UserPhoto
-        [HttpGet]
-        [ActionName("getPhotos")]
-        public IList<GetPhotoDto> Get()
-        {
-            return null;
-        }
+        
         [HttpGet("{userId}", Name = "GetUserPhotosContacts")]
         [ActionName("getPhotoContacts")]
 
@@ -41,7 +41,7 @@ namespace SocialNetwork.Controllers
         [HttpGet("{userPhotoId}", Name = "GetPhotoInfo")]
         [ActionName("getPhotoInfo")]
 
-        public async Task<GetUserPhotoInfoDto> getPhotoInfo(int userPhotoId)
+        public async Task<GetUserPhotoInfoDto> GetPhotoInfo(int userPhotoId)
         {
             return await _userPhotoQuery.GetUserPhotoInfoDtoByUserPhotoId(userPhotoId);
         }
@@ -62,6 +62,14 @@ namespace SocialNetwork.Controllers
         public async Task AddPhoto([FromBody] AddPhotoDto photo)
         {
              await _addUserPhotoCommandHandler.Handler(photo);
+        }
+
+        [HttpPost]
+        [ActionName("DeletePhoto")]
+        public async Task DeletePhoto(DeletePhotoDto photo)
+        {
+            await _deleteUserPhotoCommandHandler.DeleteUserPhotoByPhotoId(photo.PhotoId);
+
         }
 
         

@@ -4,16 +4,17 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using SocialNetwork.Domain.Dtos;
+using System.Threading.Tasks;
 
 namespace SocialNetwork.Domain.Business.UserPhotoBusiness
 {
-    public class DeletePhotoBusiness : IDeleteUserPhotoBusiness
+    public class DeleteUserPhotoBusiness : IDeleteUserPhotoBusiness
     {
         private readonly IUserPhotoRepository _photoRepository;
 
         private readonly IGetUserPhotoBusiness _getPhoto;
 
-        public DeletePhotoBusiness(IUserPhotoRepository photoRepository, IGetUserPhotoBusiness getPhoto)
+        public DeleteUserPhotoBusiness(IUserPhotoRepository photoRepository, IGetUserPhotoBusiness getPhoto)
         {
             _photoRepository = photoRepository;
 
@@ -21,9 +22,9 @@ namespace SocialNetwork.Domain.Business.UserPhotoBusiness
         
         }
 
-        public void DeletePhotoByPhotoId(int PhotoId)
+        public async Task DeletePhotoByPhotoId(int PhotoId)
         {
-            var userPhoto = _getPhoto.GetUserPhotoByPhotoId(PhotoId);
+            var userPhoto = await _getPhoto.GetUserPhotoByPhotoId(PhotoId);
             _photoRepository.DeleteUserPhoto(userPhoto);
         }
 

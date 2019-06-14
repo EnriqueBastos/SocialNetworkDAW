@@ -49,6 +49,8 @@ namespace SocialNetwork
             services.AddTransient<IGetUserPhotoBusiness,GetUserPhotoBusiness>();
             services.AddTransient<IAddUserPhotoBusiness, AddUserPhotoBusiness>();
             services.AddTransient<IAddUserPhotoCommandHandler, AddUserPhotoCommandHandler>();
+            services.AddTransient<IDeleteUserPhotoCommandHandler, DeleteUserPhotoCommandHandler>();
+            services.AddTransient<IDeleteUserPhotoBusiness, DeleteUserPhotoBusiness>();
             
             //Music dependencies
             services.AddTransient<IMusicQuery, MusicQuery>();

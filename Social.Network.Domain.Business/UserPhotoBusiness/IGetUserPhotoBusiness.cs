@@ -7,7 +7,7 @@ namespace SocialNetwork.Domain.Business.UserPhotoBusiness
     public interface IGetUserPhotoBusiness
     {
         Task<GetPhotoDto> GetPhotoDetailsDtoByPhotoId(int PhotoId);
-        UserPhoto GetUserPhotoByPhotoId(int PhotoId);
+        Task<UserPhoto> GetUserPhotoByPhotoId(int PhotoId);
 
         Task<GetUserPhotoInfoDto> GetUserPhotoInfoDtoByPhotoId(int userPhotoId);
     }
