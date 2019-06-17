@@ -22,7 +22,7 @@ namespace SocialNetwork.Domain.Business.UserPhotoBusiness
         
         }
 
-        public async Task DeletePhotoByPhotoId(int PhotoId)
+        public async Task DeleteUserPhotoByPhotoId(int PhotoId)
         {
             var userPhoto = await _getPhoto.GetUserPhotoByPhotoId(PhotoId);
             _photoRepository.DeleteUserPhoto(userPhoto);

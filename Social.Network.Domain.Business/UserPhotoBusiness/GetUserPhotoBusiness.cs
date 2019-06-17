@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SocialNetwork.Domain.Business.LikesPhotoBusiness;
 using SocialNetwork.Domain.Contracts;
 using SocialNetwork.Domain.Dtos;
 using SocialNetwork.Domain.Entities;
@@ -10,13 +11,18 @@ namespace SocialNetwork.Domain.Business.UserPhotoBusiness
     public class GetUserPhotoBusiness : IGetUserPhotoBusiness
     {
         private readonly IUserPhotoRepository _userPhotoRepository;
-
         private readonly IGetUserPhotoCommentsBusiness _getUserPhotoCommentsBusiness;
+        private readonly IGetLikesPhotoBusiness _getLikesPhotoBusiness;
 
-        public GetUserPhotoBusiness(IUserPhotoRepository userPhotoRepository , IGetUserPhotoCommentsBusiness getUserPhotoCommentsBusiness)
+        public GetUserPhotoBusiness(
+            IUserPhotoRepository userPhotoRepository ,
+            IGetUserPhotoCommentsBusiness getUserPhotoCommentsBusiness,
+            IGetLikesPhotoBusiness getLikesPhotoBusiness
+            )
         {
             _userPhotoRepository = userPhotoRepository;
             _getUserPhotoCommentsBusiness = getUserPhotoCommentsBusiness;
+            _getLikesPhotoBusiness = getLikesPhotoBusiness;
         }
 
         public async Task<GetPhotoDto> GetPhotoDetailsDtoByPhotoId(int PhotoId)
@@ -47,14 +53,13 @@ namespace SocialNetwork.Domain.Business.UserPhotoBusiness
 
         public async  Task<UserPhoto> GetUserPhotoByUserPhotoId(int userPhotoId)
         {
-            var k = await _userPhotoRepository
+            var userPhoto = await _userPhotoRepository
                 .GetUserPhoto()
-                .Include(userPhoto => userPhoto.User)
-                .Include(userPhoto => userPhoto.Photo)
-                .Select(userPhoto =>userPhoto)
-                .FirstOrDefaultAsync(userPhoto => userPhoto.Id == userPhotoId);
+                .Include(x => x.User)
+                .Include(x => x.Photo)
+                .FirstOrDefaultAsync(x => x.Id == userPhotoId);
 
-            return k;
+            return userPhoto;
             
                 
                
@@ -64,9 +69,9 @@ namespace SocialNetwork.Domain.Business.UserPhotoBusiness
         public async  Task<GetUserPhotoInfoDto> GetUserPhotoInfoDtoByPhotoId(int userPhotoId)
         {
             var comments = await _getUserPhotoCommentsBusiness
-                            .GetCommentsByUserPhotoId(userPhotoId);
+                            .GetCommentDtosByUserPhotoId(userPhotoId);
 
-
+            var likes = await _getLikesPhotoBusiness.GetLikesPhotoDtosByUserPhotoId(userPhotoId);
             var photo = await GetUserPhotoByUserPhotoId(userPhotoId);
 
             return new GetUserPhotoInfoDto
@@ -78,7 +83,7 @@ namespace SocialNetwork.Domain.Business.UserPhotoBusiness
                 ImageBytes = photo.Photo.ImageBytes,
                 Title = photo.Photo.Title,
                 UploadDateTime = photo.Photo.UpdateDateTime,
-                Likes = photo.Photo.Likes,
+                LikesPhotoDtos = likes,
                 Comments = comments
             };
                                     

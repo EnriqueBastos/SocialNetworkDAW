@@ -1,10 +1,10 @@
 ﻿using SocialNetwork.Domain.Dtos;
-
+using System.Threading.Tasks;
 
 namespace SocialNetwork.Domain.Business.CommentBusiness
 {
     public interface IDeleteUserPhotoCommentBusiness
     {
-         void DeleteUserPhotoCommentByCommentDto(CommentDto comment);
+        Task DeleteUserPhotoCommentsByPhotoId(int photoId);
     }
 }

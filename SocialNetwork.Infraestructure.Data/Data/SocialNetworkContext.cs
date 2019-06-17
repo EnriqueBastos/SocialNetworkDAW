@@ -23,6 +23,8 @@ namespace SocialNetwork.Data
 
         public DbSet<UserPhoto> UserPhotos { get; set; }
 
+        public DbSet<LikesPhoto> LikesPhotos { get;  set; }
+
         public DbSet<Contact> Contacts { get; set; }
 
         public DbSet<MessageChat> MessageChats { get; set; }

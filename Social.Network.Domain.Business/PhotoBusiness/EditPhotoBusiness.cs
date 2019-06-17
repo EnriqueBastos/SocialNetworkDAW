@@ -20,9 +20,7 @@ namespace SocialNetwork.Domain.Business.PhotoBusiness
                 Id = photoDto.UserPhotoId,
                 Title = photoDto.Title,
                 ImageBytes = photoDto.ImageBytes,
-                UpdateDateTime = photoDto.UploadDateTime,
-                Likes = photoDto.Likes,
-                Dislikes = photoDto.DisLikes
+                UpdateDateTime = photoDto.UploadDateTime
             });
         }
     }

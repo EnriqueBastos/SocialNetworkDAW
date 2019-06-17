@@ -1,10 +1,11 @@
 ﻿using SocialNetwork.Domain.Dtos;
+using SocialNetwork.Domain.Dtos.UserDtos;
 using System.Threading.Tasks;
 
 namespace SocialNetwork.Application.Commands
 {
     public interface IAddUserCommandHandler
     {
-        Task<int> Handler(UserDto user);
+        Task<GetLoginDto> Handler(UserDto user);
     }
 }

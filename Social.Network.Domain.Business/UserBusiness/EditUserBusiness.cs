@@ -41,7 +41,7 @@ namespace SocialNetwork.Domain.Business.UserBusiness
             {
                 user.Password = setUserDto.Password;
             }
-
+            user.BackgroundApp = setUserDto.BackgroundApp;
             user.Name = setUserDto.Name;
             user.LastName = setUserDto.LastName;
             user.Email = setUserDto.Email;

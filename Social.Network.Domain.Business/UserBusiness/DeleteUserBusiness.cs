@@ -22,21 +22,9 @@ namespace SocialNetwork.Domain.Business.UserBusiness
 
         public async Task DeleteUserByUserId(int userId)
         {
-            var user = await _getUserBusiness.GetUserDtoByUserId(userId);
+            var user = await _getUserBusiness.GetUserByUserId(userId);
 
-            _userRepository.DeleteUser(new User {
-                Id = user.Id,
-                Name = user.Name,
-                LastName = user.LastName,
-                Email = user.Email,
-                Password = user.Password,
-                DateBirthday = user.DateBirthday,
-                PhotoProfile = user.PhotoProfile,
-                BackgroundApp = user.BackgroundApp,
-                Private = user.Private
-            });
-
-            await _userRepository.UnitOfWork.Save();
+            _userRepository.DeleteUser(user);
         }
     }
 }

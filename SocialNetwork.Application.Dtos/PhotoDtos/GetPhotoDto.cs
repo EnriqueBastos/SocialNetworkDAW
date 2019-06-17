@@ -1,5 +1,6 @@
-﻿using System;
-
+﻿using SocialNetwork.Domain.Dtos.PhotoDtos;
+using System;
+using System.Collections.Generic;
 
 namespace SocialNetwork.Domain.Dtos
 {
@@ -17,8 +18,8 @@ namespace SocialNetwork.Domain.Dtos
 
         public DateTime UploadDateTime { get; set; }
 
-        public int Likes { get; set; }
+        public IList<LikesPhotoDto> LikesPhotoDtos { get; set; }
 
-        public int DisLikes { get; set; }
+        
     }
 }

@@ -4,6 +4,7 @@ using SocialNetwork.Application;
 using SocialNetwork.Application.Commands;
 using SocialNetwork.Application.Commands.ContactCommands;
 using SocialNetwork.Application.Commands.ContactNotificationCommands;
+using SocialNetwork.Application.Commands.LikesPhotoCommands;
 using SocialNetwork.Application.Commands.MessageChatCommands;
 using SocialNetwork.Application.Commands.MusicCommands;
 using SocialNetwork.Application.Commands.PhotoCommands;
@@ -19,6 +20,7 @@ using SocialNetwork.Domain.Business.ChatBusiness;
 using SocialNetwork.Domain.Business.CommentBusiness;
 using SocialNetwork.Domain.Business.ContactBusiness;
 using SocialNetwork.Domain.Business.ContactNotificationBusiness;
+using SocialNetwork.Domain.Business.LikesPhotoBusiness;
 using SocialNetwork.Domain.Business.MessageChatBusiness;
 using SocialNetwork.Domain.Business.MessageChatRepository;
 using SocialNetwork.Domain.Business.MusicBusiness;
@@ -51,6 +53,14 @@ namespace SocialNetwork
             services.AddTransient<IAddUserPhotoCommandHandler, AddUserPhotoCommandHandler>();
             services.AddTransient<IDeleteUserPhotoCommandHandler, DeleteUserPhotoCommandHandler>();
             services.AddTransient<IDeleteUserPhotoBusiness, DeleteUserPhotoBusiness>();
+
+            //LikesPhoto dependencies
+            services.AddTransient<ILikesPhotoRepository, LikesPhotoRepository>();
+            services.AddTransient<IGetLikesPhotoBusiness, GetLikesPhotoBusiness>();
+            services.AddTransient<IAddLikesPhotoBusiness, AddLikesPhotoBusiness>();
+            services.AddTransient<IDeleteLikesPhotoBusiness, DeleteLikesPhotoBusiness>();
+            services.AddTransient<IAddLikesPhotoCommandHandler, AddLikesPhotoCommandHandler>();
+            services.AddTransient<IDeleteLikesPhotoCommandHandler, DeleteLikesPhotoCommandHandler>();
             
             //Music dependencies
             services.AddTransient<IMusicQuery, MusicQuery>();
@@ -65,6 +75,7 @@ namespace SocialNetwork
             services.AddTransient<IUserQuery, UserQuery>();
             services.AddTransient<IAddUserCommandHandler, AddUserCommandHandler>();
             services.AddTransient<IDeleteUserBusiness, DeleteUserBusiness>();
+            services.AddTransient<IDeleteUserCommandHandler, DeleteUserCommandHandler>();
             services.AddTransient<IAddUserBusiness, AddUserBusiness>();
             services.AddTransient<IGetUserBusiness, GetUserBusiness>();
             services.AddTransient<IUserRepository, UserRepository>();
@@ -85,6 +96,7 @@ namespace SocialNetwork
             services.AddTransient<IGetUserPhotoCommentsBusiness, GetUserPhotoCommentsBusiness>();
             services.AddTransient<IAddUserPhotoCommentBusiness, AddUserPhotoCommentBusiness>();
             services.AddTransient<IAddUserPhotoCommentCommandHandler, AddUserPhotoCommentCommandHandler>();
+            services.AddTransient<IDeleteUserPhotoCommentBusiness, DeleteUserPhotoCommentBusiness>();
 
             //ContactNotifications dependencies
             services.AddTransient<IContactNotificationRepository, ContactNotificationRepository>();

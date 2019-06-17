@@ -1,4 +1,5 @@
 ﻿using SocialNetwork.Domain.Dtos;
+using SocialNetwork.Domain.Dtos.UserDtos;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -12,9 +13,8 @@ namespace SocialNetwork.Application
 
         Task<UserDto> GetUserDtoByUserId(int userId);
 
-        Task<int> GetUserIdByLoginDto(UserLoginDto loginDto);
-
-        //Task<IList<ProfileDto>> GetProfileDtosBySearchContactDto(SearchContactDto searchContactDto);
+        Task<GetLoginDto> GetLoginDtoByUserLoginDto(UserLoginDto loginDto);
+        
 
 
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using SocialNetwork.Domain.Business.UserBusiness;
 using System.Threading.Tasks;
+using SocialNetwork.Domain.Dtos.UserDtos;
 
 namespace SocialNetwork.Application
 {
@@ -32,9 +33,9 @@ namespace SocialNetwork.Application
 
         }
 
-        public async Task<int> GetUserIdByLoginDto(UserLoginDto loginDto)
+        public async Task<GetLoginDto> GetLoginDtoByUserLoginDto(UserLoginDto loginDto)
         {
-            return await _getUserBusiness.GetUserIdByLoginDto(loginDto);
+            return await _getUserBusiness.GetLoginDtoByUserLoginDto(loginDto);
         }
 
         public async Task<ProfileDetailsDto> GetProfileDetailsDtoByUserId(int userId)

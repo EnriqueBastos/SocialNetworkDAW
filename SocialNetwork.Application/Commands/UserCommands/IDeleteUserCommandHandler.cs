@@ -5,6 +5,7 @@ namespace SocialNetwork.Application.Commands.UserCommands
 {
     public interface IDeleteUserCommandHandler
     {
-        Task Handler(UserDto user);
+        Task Handler(int userId);
+
     }
 }

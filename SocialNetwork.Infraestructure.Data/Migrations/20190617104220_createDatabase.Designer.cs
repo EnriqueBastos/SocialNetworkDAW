@@ -10,8 +10,8 @@ using SocialNetwork.Data;
 namespace SocialNetwork.Infraestructure.Migrations
 {
     [DbContext(typeof(SocialNetworkContext))]
-    [Migration("20190607111322_MessageChatUser")]
-    partial class MessageChatUser
+    [Migration("20190617104220_createDatabase")]
+    partial class createDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -70,6 +70,23 @@ namespace SocialNetwork.Infraestructure.Migrations
                     b.ToTable("ContactNotifications");
                 });
 
+            modelBuilder.Entity("SocialNetwork.Domain.Entities.LikesPhoto", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("UserId");
+
+                    b.Property<int>("UserPhotoId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("LikesPhotos");
+                });
+
             modelBuilder.Entity("SocialNetwork.Domain.Entities.MessageChat", b =>
                 {
                     b.Property<int>("Id")
@@ -118,11 +135,7 @@ namespace SocialNetwork.Infraestructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Dislikes");
-
                     b.Property<byte[]>("ImageBytes");
-
-                    b.Property<int>("Likes");
 
                     b.Property<string>("Title");
 
@@ -211,6 +224,14 @@ namespace SocialNetwork.Infraestructure.Migrations
                 });
 
             modelBuilder.Entity("SocialNetwork.Domain.Entities.ContactNotification", b =>
+                {
+                    b.HasOne("SocialNetwork.Domain.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("SocialNetwork.Domain.Entities.LikesPhoto", b =>
                 {
                     b.HasOne("SocialNetwork.Domain.Entities.User", "User")
                         .WithMany()

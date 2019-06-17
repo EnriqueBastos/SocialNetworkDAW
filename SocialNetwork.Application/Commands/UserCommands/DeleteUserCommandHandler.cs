@@ -1,6 +1,5 @@
 ﻿using SocialNetwork.Domain.Business.UserBusiness;
 using SocialNetwork.Domain.Contracts;
-using SocialNetwork.Domain.Dtos;
 using System.Threading.Tasks;
 
 namespace SocialNetwork.Application.Commands.UserCommands
@@ -16,9 +15,9 @@ namespace SocialNetwork.Application.Commands.UserCommands
             _deleteUserBusiness = deleteUserBusiness;
         }
 
-        public async Task Handler(UserDto user)
+        public async Task Handler(int userId)
         {
-            _deleteUserBusiness.DeleteUserByUserId(user.Id);
+            await _deleteUserBusiness.DeleteUserByUserId(userId);
             await _userRepository.UnitOfWork.Save();
         }
     }

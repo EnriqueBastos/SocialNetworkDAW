@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using SocialNetwork.Domain.Dtos;
 using System.Threading.Tasks;
+using SocialNetwork.Domain.Entities;
 
 namespace SocialNetwork.Domain.Business
 {
@@ -16,7 +17,7 @@ namespace SocialNetwork.Domain.Business
             _commentRepository = commentRepository;
         }
 
-        public async Task<IList<CommentDto>> GetCommentsByUserPhotoId(int idUserPhoto)
+        public async Task<IList<CommentDto>> GetCommentDtosByUserPhotoId(int idUserPhoto)
         {
             
             return await _commentRepository
@@ -33,10 +34,17 @@ namespace SocialNetwork.Domain.Business
 
                 })
                 .Where(comment => comment.UserPhotoId == idUserPhoto)
-                
                 .ToListAsync();
-         
         }
+
+        public async Task<IList<UserPhotoComment>> GetUserPhotoCommentsByUserPhotoId(int userPhotoId)
+        {
+            return await _commentRepository
+                .GetUserPhotoComment()
+                .Where(comment => comment.UserPhotoId == userPhotoId)
+                .ToListAsync();
+        }
+
         
     }
 }

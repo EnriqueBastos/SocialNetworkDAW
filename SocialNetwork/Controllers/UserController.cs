@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SocialNetwork.Application;
 using SocialNetwork.Application.Commands;
 using SocialNetwork.Application.Commands.UserCommands;
 using SocialNetwork.Domain.Dtos;
+using SocialNetwork.Domain.Dtos.UserDtos;
 
 namespace SocialNetwork.Controllers
 {
@@ -22,11 +19,19 @@ namespace SocialNetwork.Controllers
 
         private readonly IEditUserCommandHandler _editUserCommandHandler;
 
-        public UserController(IAddUserCommandHandler addUserCommandHandler, IUserQuery userQuery , IEditUserCommandHandler editUserCommandHandler )
+        private readonly IDeleteUserCommandHandler _deleteUserCommandHandler;
+
+        public UserController(
+            IAddUserCommandHandler addUserCommandHandler,
+            IUserQuery userQuery ,
+            IEditUserCommandHandler editUserCommandHandler,
+            IDeleteUserCommandHandler deleteUserCommandHandler
+            )
         {
             _addUserCommandHandler = addUserCommandHandler;
             _userQuery = userQuery;
             _editUserCommandHandler = editUserCommandHandler;
+            _deleteUserCommandHandler = deleteUserCommandHandler;
         }
 
 
@@ -41,15 +46,15 @@ namespace SocialNetwork.Controllers
 
         [HttpPost]
         [ActionName("GetUserId")]
-        public async Task<int> GetUserId(UserLoginDto loginDto)
+        public async Task<GetLoginDto> GetLoginDto(UserLoginDto loginDto)
         {
-            return await  _userQuery.GetUserIdByLoginDto(loginDto);
+            return await  _userQuery.GetLoginDtoByUserLoginDto(loginDto);
         }
 
         // POST: api/User
         [HttpPost]
         [ActionName("AddUser")]
-        public async Task<int> AddUser(UserDto userDto)
+        public async Task<GetLoginDto> AddUser(UserDto userDto)
         {
             return await  _addUserCommandHandler.Handler(userDto);
         }
@@ -60,6 +65,13 @@ namespace SocialNetwork.Controllers
         public async Task EditUser(SetUserDto profileDetailsDto)
         {
             await _editUserCommandHandler.Handler(profileDetailsDto);
+        }
+
+        [HttpPost]
+        [ActionName("DeleteUser")]
+        public async Task DeleteUser(UserDto user)
+        {
+            await _deleteUserCommandHandler.Handler(user.Id);
         }
 
 

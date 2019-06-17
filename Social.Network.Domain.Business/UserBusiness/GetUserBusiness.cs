@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SocialNetwork.Domain.Business.ContactBusiness;
 using SocialNetwork.Domain.Business.ContactNotificationBusiness;
 using SocialNetwork.Domain.Contracts;
 using SocialNetwork.Domain.Dtos;
+using SocialNetwork.Domain.Dtos.UserDtos;
 using SocialNetwork.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -96,7 +96,7 @@ namespace SocialNetwork.Domain.Business.UserBusiness
 
         }
 
-        public async Task<int> GetUserIdByLoginDto(UserLoginDto loginDto)
+        public async Task<GetLoginDto> GetLoginDtoByUserLoginDto(UserLoginDto loginDto)
         {
             var userLogin = await _userRepository
                             .GetUser()
@@ -105,7 +105,11 @@ namespace SocialNetwork.Domain.Business.UserBusiness
                             );
             if(userLogin == null)
             {
-                return -1;
+                return new GetLoginDto
+                {
+                    UserId = -1,
+                    BackgroundApp = null
+                };
             }
             string savedPasswordHash = userLogin.Password;
             byte[] hashBytes = Convert.FromBase64String(savedPasswordHash);
@@ -124,11 +128,19 @@ namespace SocialNetwork.Domain.Business.UserBusiness
 
             if (ok)
             {
-                return userLogin.Id;
+                return new GetLoginDto
+                {
+                    UserId = userLogin.Id,
+                    BackgroundApp = userLogin.BackgroundApp
+                };
             }
             else
             {
-                return -1;
+                return new GetLoginDto
+                {
+                    UserId = -1,
+                    BackgroundApp = null
+                };
             }
             
                 

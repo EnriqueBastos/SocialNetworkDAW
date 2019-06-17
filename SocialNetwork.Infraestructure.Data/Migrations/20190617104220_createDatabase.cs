@@ -23,23 +23,6 @@ namespace SocialNetwork.Infraestructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "MessageChats",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    MessageText = table.Column<string>(nullable: true),
-                    UserId = table.Column<int>(nullable: false),
-                    ChatId = table.Column<int>(nullable: false),
-                    MessageDate = table.Column<DateTime>(nullable: false),
-                    IsSeen = table.Column<bool>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_MessageChats", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Photos",
                 columns: table => new
                 {
@@ -47,9 +30,7 @@ namespace SocialNetwork.Infraestructure.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Title = table.Column<string>(nullable: true),
                     ImageBytes = table.Column<byte[]>(nullable: true),
-                    UpdateDateTime = table.Column<DateTime>(nullable: false),
-                    Likes = table.Column<int>(nullable: false),
-                    Dislikes = table.Column<int>(nullable: false)
+                    UpdateDateTime = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -118,6 +99,55 @@ namespace SocialNetwork.Infraestructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "LikesPhotos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    UserPhotoId = table.Column<int>(nullable: false),
+                    UserId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LikesPhotos", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_LikesPhotos_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MessageChats",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    MessageText = table.Column<string>(nullable: true),
+                    UserId = table.Column<int>(nullable: false),
+                    ChatId = table.Column<int>(nullable: false),
+                    MessageDate = table.Column<DateTime>(nullable: false),
+                    IsSeen = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MessageChats", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_MessageChats_Chats_ChatId",
+                        column: x => x.ChatId,
+                        principalTable: "Chats",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_MessageChats_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Musics",
                 columns: table => new
                 {
@@ -153,8 +183,7 @@ namespace SocialNetwork.Infraestructure.Migrations
                         name: "FK_UserPhotos_Photos_PhotoId",
                         column: x => x.PhotoId,
                         principalTable: "Photos",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_UserPhotos_Users_UserId",
                         column: x => x.UserId,
@@ -200,6 +229,21 @@ namespace SocialNetwork.Infraestructure.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_LikesPhotos_UserId",
+                table: "LikesPhotos",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MessageChats_ChatId",
+                table: "MessageChats",
+                column: "ChatId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MessageChats_UserId",
+                table: "MessageChats",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Musics_UserId",
                 table: "Musics",
                 column: "UserId");
@@ -228,13 +272,13 @@ namespace SocialNetwork.Infraestructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Chats");
-
-            migrationBuilder.DropTable(
                 name: "ContactNotifications");
 
             migrationBuilder.DropTable(
                 name: "Contacts");
+
+            migrationBuilder.DropTable(
+                name: "LikesPhotos");
 
             migrationBuilder.DropTable(
                 name: "MessageChats");
@@ -244,6 +288,9 @@ namespace SocialNetwork.Infraestructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "UserPhotoComments");
+
+            migrationBuilder.DropTable(
+                name: "Chats");
 
             migrationBuilder.DropTable(
                 name: "UserPhotos");

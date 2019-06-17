@@ -35,25 +35,6 @@ namespace SocialNetwork.Data
                 Context.Users.Add(User);
             }
 
-           
-
-            Context.SaveChanges();
-
-            var Photos = new Photo[]
-            {
-                new Photo {Id=1, Title="En la sierra", Likes=0 },
-
-                new Photo {Id=2, Title="En la playa",Likes=0 },
-
-                new Photo {Id=3,  Title="En la sierra", Likes=0 },
-
-                new Photo {Id=4, Title="En la sierra", Likes=0 },
-            };
-
-            foreach (Photo photo in Photos)
-            {
-                Context.Photos.Add(photo);
-            }
 
             Context.SaveChanges();
 

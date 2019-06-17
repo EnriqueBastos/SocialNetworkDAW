@@ -1,33 +1,32 @@
 ﻿using SocialNetwork.Data;
 using SocialNetwork.Domain.Contracts;
 using SocialNetwork.Domain.Entities;
-
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace SocialNetwork.Infraestructure.Repository
 {
-    public class MusicRepository : IMusicRepository
+    public class LikesPhotoRepository : ILikesPhotoRepository
     {
         private readonly SocialNetworkContext _socialNetworkContext;
 
-        public MusicRepository(SocialNetworkContext socialNetworkContext)
+        public LikesPhotoRepository(SocialNetworkContext socialNetworkContext)
         {
             _socialNetworkContext = socialNetworkContext;
         }
-        public IQueryable<Music> GetMusic()
+        public IQueryable<LikesPhoto> GetLikesPhoto()
         {
-            return _socialNetworkContext.Set<Music>();
+            return _socialNetworkContext.Set<LikesPhoto>();
         }
 
-        public void DeleteMusic(Music music)
+        public void DeleteLikesPhoto(LikesPhoto likesPhoto)
         {
-            _socialNetworkContext.Set<Music>().Remove(music);
+            _socialNetworkContext.Set<LikesPhoto>().Remove(likesPhoto);
         }
 
-        public async Task AddMusic(Music music)
+        public async Task AddLikesPhoto(LikesPhoto likesPhoto)
         {
-            await _socialNetworkContext.Set<Music>().AddAsync(music);
+            await _socialNetworkContext.Set<LikesPhoto>().AddAsync(likesPhoto);
         }
 
         public IUnitOfWork UnitOfWork
@@ -37,7 +36,5 @@ namespace SocialNetwork.Infraestructure.Repository
                 return _socialNetworkContext;
             }
         }
-
-
     }
 }

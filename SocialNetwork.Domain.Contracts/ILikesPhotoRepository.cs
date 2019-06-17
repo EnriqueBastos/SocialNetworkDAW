@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace SocialNetwork.Domain.Contracts
 {
-    public interface IMusicRepository : IRepository
+    public interface ILikesPhotoRepository : IRepository
     {
-        IQueryable<Music> GetMusic();
+        IQueryable<LikesPhoto> GetLikesPhoto();
 
-        void DeleteMusic(Music music);
+        void DeleteLikesPhoto(LikesPhoto likesPhoto);
 
-        Task AddMusic(Music music);
+        Task AddLikesPhoto(LikesPhoto likesPhoto);
     }
 }

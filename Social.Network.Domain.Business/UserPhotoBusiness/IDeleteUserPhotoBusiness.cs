@@ -7,6 +7,6 @@ namespace SocialNetwork.Domain.Business.UserPhotoBusiness
 {
     public interface IDeleteUserPhotoBusiness
     {
-        Task DeletePhotoByPhotoId(int PhotoId);
+        Task DeleteUserPhotoByPhotoId(int PhotoId);
     }
 }

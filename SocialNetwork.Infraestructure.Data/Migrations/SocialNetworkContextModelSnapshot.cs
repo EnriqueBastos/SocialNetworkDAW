@@ -68,6 +68,25 @@ namespace SocialNetwork.Infraestructure.Migrations
                     b.ToTable("ContactNotifications");
                 });
 
+            modelBuilder.Entity("SocialNetwork.Domain.Entities.LikesPhoto", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("UserId");
+
+                    b.Property<int>("UserPhotoId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.HasIndex("UserPhotoId");
+
+                    b.ToTable("LikesPhotos");
+                });
+
             modelBuilder.Entity("SocialNetwork.Domain.Entities.MessageChat", b =>
                 {
                     b.Property<int>("Id")
@@ -116,11 +135,7 @@ namespace SocialNetwork.Infraestructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Dislikes");
-
                     b.Property<byte[]>("ImageBytes");
-
-                    b.Property<int>("Likes");
 
                     b.Property<string>("Title");
 
@@ -213,6 +228,19 @@ namespace SocialNetwork.Infraestructure.Migrations
                     b.HasOne("SocialNetwork.Domain.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("SocialNetwork.Domain.Entities.LikesPhoto", b =>
+                {
+                    b.HasOne("SocialNetwork.Domain.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("SocialNetwork.Domain.Entities.UserPhoto", "UserPhoto")
+                        .WithMany()
+                        .HasForeignKey("UserPhotoId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

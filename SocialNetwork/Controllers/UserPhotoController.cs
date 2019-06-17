@@ -69,7 +69,6 @@ namespace SocialNetwork.Controllers
         public async Task DeletePhoto(DeletePhotoDto photo)
         {
             await _deleteUserPhotoCommandHandler.DeleteUserPhotoByPhotoId(photo.PhotoId);
-
         }
 
         

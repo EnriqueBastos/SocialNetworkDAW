@@ -6,30 +6,40 @@ using SocialNetwork.Domain.Dtos;
 using SocialNetwork.Domain.Contracts;
 using SocialNetwork.Domain.Business.ContactBusiness;
 using System.Threading.Tasks;
+using SocialNetwork.Domain.Business.LikesPhotoBusiness;
 
 namespace SocialNetwork.Domain.Business.UserPhotoBusiness
 {
     public class GetListUserPhotosBusiness : IGetListUserPhotosBusiness
     {
-        public readonly IUserPhotoRepository _photoRepository;
+        private readonly IUserPhotoRepository _photoRepository;
 
-        public readonly IContactRepository _contactRepository;
+        private readonly IContactRepository _contactRepository;
 
-        public readonly IGetContactBusiness _getContactBusiness;
+        private readonly IGetContactBusiness _getContactBusiness;
 
-        public GetListUserPhotosBusiness(IUserPhotoRepository photoRepository, IContactRepository contactRepository, IGetContactBusiness getContactBusiness)
+        private readonly IGetLikesPhotoBusiness _getLikesPhotoBusiness;
+
+
+
+        public GetListUserPhotosBusiness(
+            IUserPhotoRepository photoRepository,
+            IContactRepository contactRepository,
+            IGetContactBusiness getContactBusiness,
+            IGetLikesPhotoBusiness getLikesPhotoBusiness
+            )
         {
             _photoRepository = photoRepository;
-
             _contactRepository = contactRepository;
-
             _getContactBusiness = getContactBusiness;
+            _getLikesPhotoBusiness = getLikesPhotoBusiness;
         }
         public IList<GetPhotoDto> GetLastPhotosContacts(int userId)
         {
             IList<GetPhotoDto> listGetPhotoDto = new List<GetPhotoDto>();
             var contactsId = _getContactBusiness.GetListFriendIdByUserId(userId).ToList();
             contactsId.Add(userId);
+
             contactsId.ForEach(id =>
                     GetListPhotosByUserId(id)
                     .Result
@@ -38,8 +48,6 @@ namespace SocialNetwork.Domain.Business.UserPhotoBusiness
                         listGetPhotoDto.Add(photo)
                         )
                 );
-           
-
             return listGetPhotoDto
                 .OrderByDescending(photo => photo.UploadDateTime)
                 .ToList();
@@ -49,25 +57,29 @@ namespace SocialNetwork.Domain.Business.UserPhotoBusiness
 
         public async Task<IList<GetPhotoDto>> GetListPhotosByUserId(int userId)
         {
-            return await  _photoRepository
+            IList<GetPhotoDto> getPhotoDtos = new List<GetPhotoDto>();
+            var userPhotos = await _photoRepository
                 .GetUserPhoto()
+                .Include(userphoto => userphoto.Photo)
+                .Include(userphoto => userphoto.User)
                 .OrderByDescending(photo => photo)
                 .Where(userPhoto => userPhoto.UserId == userId)
-                .Select(photo =>
-                new GetPhotoDto {
-                    UserPhotoId = photo.Id,
-                    UserName = photo.User.Name,
-                    ImageBytes = photo.Photo.ImageBytes,
-                    Title = photo.Photo.Title,
-                    UploadDateTime = photo.Photo.UpdateDateTime,
-                    Likes = photo.Photo.Likes,
-                    DisLikes = photo.Photo.Dislikes,
-                    UserId = photo.UserId
-                    
-
-                })
                 .ToListAsync();
-            
+            foreach(Entities.UserPhoto userPhoto in userPhotos)
+            {
+                var likesPhotoDtos = await _getLikesPhotoBusiness.GetLikesPhotoDtosByUserPhotoId(userPhoto.Id);
+                getPhotoDtos.Add(new GetPhotoDto
+                {
+                    UserPhotoId = userPhoto.Id,
+                    UserName = userPhoto.User.Name,
+                    ImageBytes = userPhoto.Photo.ImageBytes,
+                    Title = userPhoto.Photo.Title,
+                    UploadDateTime = userPhoto.Photo.UpdateDateTime,
+                    UserId = userPhoto.UserId,
+                    LikesPhotoDtos = likesPhotoDtos
+                });
+            }
+            return getPhotoDtos;
         }
     }
 }

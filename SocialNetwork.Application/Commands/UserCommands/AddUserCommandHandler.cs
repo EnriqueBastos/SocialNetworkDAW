@@ -1,7 +1,7 @@
 ﻿using SocialNetwork.Domain.Business.UserBusiness;
 using SocialNetwork.Domain.Contracts;
 using SocialNetwork.Domain.Dtos;
-
+using SocialNetwork.Domain.Dtos.UserDtos;
 using System.Threading.Tasks;
 
 namespace SocialNetwork.Application.Commands
@@ -21,13 +21,13 @@ namespace SocialNetwork.Application.Commands
             _getUserBusiness = getUserBusiness;
         }
 
-        public async Task<int> Handler(UserDto user)
+        public async Task<GetLoginDto> Handler(UserDto user)
         {
             await _addUserBusiness.AddUser(user);
 
             await _userRepository.UnitOfWork.Save();
 
-            return await _getUserBusiness.GetUserIdByLoginDto(
+            return await _getUserBusiness.GetLoginDtoByUserLoginDto(
                 new UserLoginDto
                 {
                     Email = user.Email,

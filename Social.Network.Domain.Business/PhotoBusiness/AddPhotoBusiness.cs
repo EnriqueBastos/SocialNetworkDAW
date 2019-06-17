@@ -25,9 +25,7 @@ namespace SocialNetwork.Domain.Business.PhotoBusiness
             {
                 Title = photoDto.Title,
                 ImageBytes = bytesPhoto,
-                UpdateDateTime = dateTime,
-                Likes = 0,
-                Dislikes = 0
+                UpdateDateTime = dateTime
             });
 
            

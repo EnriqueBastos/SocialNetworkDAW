@@ -14,10 +14,6 @@ namespace SocialNetwork.Domain.Entities
         public byte[] ImageBytes { get; set; }
 
         public DateTime UpdateDateTime { get; set; }
-
-        public int Likes { get; set; }
-
-        public int Dislikes { get; set; }
         
     }
 }
